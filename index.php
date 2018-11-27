@@ -11,7 +11,7 @@ $op = $_POST["op"];
 if ($_SERVER["REQUEST_METHOD"] == "POST") //form sent
 {
 
-  if((!isset($cdc) && !isset($cdcpwd)) || (!isset($email) && !isset($outpwd)))//se dati cdc non impostati
+  if((!isset($cdc) && !isset($cdcpwd)) || (!isset($email) && !isset($outpwd)))//se dati non impostati
   {
         echo "DATI NON INSERITI: Compilare uno dei due form e riprovare!";
   }else {

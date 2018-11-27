@@ -1,20 +1,26 @@
 <?php
 
-$cdc = $_POST["cdc"];
-$cdcpwd = $_POST["cdcPwd"];
-$email = $_POST["email"];
-$outpwd = $_POST["outPwd"];
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") //form sent
+if((isset($cdc) && isset($cdcpwd))//se dati non impostati
 {
-
-  if(!isset($cdc) && !isset($cdcpwd))//se dati cdc non impostati
-  {
-    if(!isset($email) && !isset($outpwd))//se dati esterni non impostati
-    {
-
-    }
-  }
-
-
+      if(isset($op))
+      {
+        switch ($op) {
+          case 'incassiore':
+            include 'incassiore.php';
+            break;
+          case 'differenze':
+            include 'differenze.php';
+            break;
+          case 'rifiuti':
+            include 'rifiuti.php';
+            break;
+          case 'manutenzioni':
+            include 'manutenzioni.php'
+            break;
+          default:
+            echo "Selezionare un'operazione!"
+            break;
+        }
+      }
+}
  ?>
