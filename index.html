@@ -1,31 +1,6 @@
-<?php
-
-$cdc = $_POST["cdc"];
-$cdcpwd = $_POST["cdcPwd"];
-$email = $_POST["email"];
-$outpwd = $_POST["outPwd"];
-
-$op = $_POST["op"];
-
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") //form sent
-{
-
-  if((!isset($cdc) && !isset($cdcpwd)) || (!isset($email) && !isset($outpwd)))//se dati non impostati
-  {
-        echo "DATI NON INSERITI: Compilare uno dei due form e riprovare!";
-  }else {
-    if(isset($op))
-    {
-      header(./reponse.php);
-    }
-  }
-
-
- ?>
-
 <html>
    <head>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <style>
          html { font-family: sans-serif; background-color: #4169E1;}
          #negozi {
@@ -55,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") //form sent
          <fieldset>
             <!---ACCESSO NEGOZI---------------------------------------------------------------->
             <legend>ACCESSO NEGOZI</legend>
-            <form class="datainput" action="<?php echo htmlspecialchars( . 'response.php' .  )?>" method="post">
+            <form class="datainput" action="response.php" method="post">
                <table>
                   <tr>
                      <td>
@@ -113,16 +88,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") //form sent
       <br><br>
 
 
-<div id="menu">
+    <div id="menu">
       <select name="op">
          <option value="incassiore">INCASSI E ORE (settimanali)</option>
          <option value="differenze">MOD. 140</option>
          <option value="rifiuti">MOD. 54</option>
          <option value="manutenzioni">MOD. 23</option>
       </select><br><br>
-    <input type="button" value="INVIA">
+    <input type="button" value="INVIA" onclick="checkData()">
     </div>
 
+<script>
+
+
+  function checkData()
+  {
+    if((!$("cdc").value) || (!$("cdcPwd").value) || (!$("email").value) || (!$("outPwd").value))
+    {
+      alert("Dati inseriti non corretti o incompleti!");
+      //break;
+    }
+
+  }
+
+
+</script>
 
       </body>
       </html>
