@@ -28,14 +28,14 @@ table {
       <td>TOT</td><!--riduz oraria + ferie + pr-->
     </tr>
     <tr id="primo">
-      <td> <?php $nsett = date("W"); ?></td>
+      <td> <?php echo date("W"); ?></td><!--controllare non funziona!-->
       <td><input type="number" maxlength="3" size="3" name="tiro"></td>
       <td><input type="number" maxlength="3" size="3" name="eff"></td>
       <td><input type="number" maxlength="1" size="1" name="rid"></td>
       <td><input type="number" maxlength="3" size="3" name="fe"></td>
       <td><input type="number" maxlength="3" size="3" name="pr"></td>
       <td><input type="number" maxlength="3" size="3" name="tot">
-      <input type="submit" onclick="tot()"></td>
+      <input type="submit"></td>
     </tr>
     <tr>
       <td>Malattia</td>
@@ -67,23 +67,30 @@ table {
 
 
   </table>
+
 </form>
+
+
+
 
 <script>
 
 //$(document).ready(function(){
-    function tot()
-    {
 
-      var x = $("#primo input").value;
+
+
 
       //var tot = parseInt(document.getElementsByName("tot").value);
 
       //tot += x;
-      alert(x);
+      $("#primo input").keyup(function(){
+          var x = $("#primo input").value;
+          $("tot").html(x);
+
+      })
       //document.getElementsByName("tot").innerHTML = x;
 
-    });}
+
 
   //});
 
@@ -93,9 +100,9 @@ table {
 
 </html>
 
-<?php
+<?php/*
 
-/*$dati_io = array('sett' => $_POST['sett'], ... );//verificare sensatezza della soluzione
+//$dati_io = array('sett' => $_POST['sett'], ... );//verificare sensatezza della soluzione
 
 $sett = $_POST['sett'];
 $tiro = $_POST['tiro'];
@@ -122,7 +129,7 @@ if(!isset($_POST["submit"]))//se non sono stati compilati tutti i campi restitui
 }else {
   //scrivi i dati sulla relativa tabella nel SQLiteDatabase
   //OVVERO:
-$connect = mysqli_connect(/*hostname,username,password*);
+$connect = mysqli_connect(/*hostname,username,password);
   if(!$connect)
   {
     echo '<script language="javascript">';
@@ -131,7 +138,7 @@ $connect = mysqli_connect(/*hostname,username,password*);
     exit;
   }
 
-mysqli_select_db($connect,/*nome tabella*);
+mysqli_select_db($connect,nome tabella/);
 
   $insert = "INSERT INTO Incassiore (sett,tiro,eff_lav,rid,fe,pr,tot,mal,mat,varie,org,ing,out,str,inc,resa)";
   $insert .= "VALUES ('$sett','$tiro','$eff_lav','$rid','$fe','$pr','$tot','$mal','$mat','$varie','$org','$ing','$out','$str','$inc','$resa')";
