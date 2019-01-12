@@ -1,9 +1,6 @@
 <?php
+$op=$_POST["op"];
 
-if((isset($cdc) && isset($cdcpwd))//GESTIONE OPERAZIONI NEGOZI
-{
-      if(isset($op))//visualizzazione del form relativo all'operazione richiesta
-      {
         switch ($op) {
           case 'incassiore':
             include 'incassiorecdc.php';
@@ -15,14 +12,14 @@ if((isset($cdc) && isset($cdcpwd))//GESTIONE OPERAZIONI NEGOZI
             include 'rifiuticdc.php';
             break;
           case 'manutenzioni':
-            include 'manutenzionicdc.php'
+            include 'manutenzionicdc.php';
             break;
-          default:
+          /*default:
             echo "Selezionare un'operazione!"//meglio gestirla a livello client con Javascript nella pagina
-            break;
+            break;*/
         }
-      }
-}
+      
+
 
 //SE è STATO EFFETTUATO L'ACCESSO CON I DATI DEGLI ESTERNI
 //VERRA VISUALIZZATA UNA TABELLA CON L'ELENCO DEI MODELLI (DI UN TIPO)

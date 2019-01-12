@@ -16,7 +16,7 @@ table {
 
 
 <body>
-  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+  <form name="ic" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
   <table border="1">
     <tr>
       <td>Settimana numero</td>
@@ -28,14 +28,14 @@ table {
       <td>TOT</td><!--riduz oraria + ferie + pr-->
     </tr>
     <tr id="primo">
-      <td> <?php echo date("W"); ?></td><!--controllare non funziona!-->
+      <td> <?php echo date("W"); ?></td>
       <td><input type="number" maxlength="3" size="3" name="tiro"></td>
       <td><input type="number" maxlength="3" size="3" name="eff"></td>
       <td><input type="number" maxlength="1" size="1" name="rid"></td>
       <td><input type="number" maxlength="3" size="3" name="fe"></td>
       <td><input type="number" maxlength="3" size="3" name="pr"></td>
-      <td><input type="number" maxlength="3" size="3" name="tot">
-      <input type="submit"></td>
+      <td><input maxlength="3" size="3" name="tot">
+      </td>
     </tr>
     <tr>
       <td>Malattia</td>
@@ -83,10 +83,21 @@ table {
       //var tot = parseInt(document.getElementsByName("tot").value);
 
       //tot += x;
-      $("#primo input").keyup(function(){
-          var x = $("#primo input").value;
-          $("tot").html(x);
 
+      
+
+      $("#primo input").keyup(function() {
+      var risultato = 0;
+      var array = $("#primo input");
+        for(var i=0; i<array.length;i++){
+        var temp = array[i];
+        if(temp.value != ""){
+            risultato += parseInt(temp.value);
+        }
+      }
+        document.getElementById("output").innerText = risultato;
+          /*var field = document.ic.tot.value;
+          field = eval(field + $(this).val());*/
       })
       //document.getElementsByName("tot").innerHTML = x;
 
@@ -100,7 +111,7 @@ table {
 
 </html>
 
-<?php/*
+<!--/*
 
 //$dati_io = array('sett' => $_POST['sett'], ... );//verificare sensatezza della soluzione
 
@@ -156,6 +167,6 @@ mysqli_select_db($connect,nome tabella/);
     mysqli_close($connect);
   }
 
-}*/
+}*/-->
 
-?>
+
