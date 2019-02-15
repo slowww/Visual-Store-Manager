@@ -3,6 +3,8 @@
 $email = $_POST["email"];
 $pwd = $_POST["outPwd"];
 
+//echo $email; debug
+//echo $pwd; debug
 
 
 if(!$conn)
@@ -28,9 +30,9 @@ if(!$conn)
 
 <h2>BENVENUTO, <?php 
 
-$query = "SELECT nome_dip,cogn_dip FROM dipendenti WHERE id_dip = 'massimo.benedetti@insmercato.it' AND pwd_dip = 'massimopwd'";
-//$query .= "WHERE id_dip = 'massimo.benedetti@insmercato.it' AND pwd_dip = 'massimopwd'";
-$result=mysqli_query($conn, $query);
+$query = "SELECT nome_dip,cogn_dip FROM dipendenti WHERE id_dip = '$email' AND pwd_dip = '$pwd'";
+
+//echo $query; debug
 
 
 if ($result=mysqli_query($conn,$query))
@@ -40,7 +42,7 @@ if ($result=mysqli_query($conn,$query))
     mysqli_free_result($result);
   }
 
-mysqli_close($conn);
+
 
 /*
 $result=mysqli_query($conn, $query);
@@ -53,15 +55,39 @@ while($row=mysqli_fetch_row($result))
 mysqli_close($conn);?>*/
 ?></h2>
 
-<select>
-  <?php
-    $query="SELECT "
-  
-  ?>
-</select>
+<table>
+<tr><td>CDC</td><td>MODELLO</td><td>MESE</td></tr>
+<tr>
+  <td>
+    <select>
+      <?php
+        $query="SELECT cdc, citta_cdc FROM cdc";
+
+        if ($result=mysqli_query($conn,$query))
+        {
+            while($row = mysqli_fetch_array($result)){ 
+              
+                  echo "<option>" . $row['cdc'] . "-" . $row['citta_cdc'] . "</option>";
+            }      
+        } 
+      
+      ?>
+    </select>
+  </td>
+  <td>
+    <select>
+      <option>INCASSI&ORE</option>
+      <option>MOD.54 (rifiuti)</option>
+      <option>MOD.23 (manutenzioni)</option>
+      <option>MOD.140 (differenze di carico)</option>
+    </select>
+  </td>
+  <td>
+  <input type="month" value="<?php echo Date("Y"); ?>">
+  </td>
 
 
-
+<?php mysqli_close($conn); ?>
 
 
 
