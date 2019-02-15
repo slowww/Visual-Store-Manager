@@ -81,7 +81,7 @@
       </div>
 
       <div id="esterni">
-         <form id="outinput" action="response.php" method="post">
+         <form id="outinput" action="outresponse.php" method="post">
                <fieldset>
                      <legend>ACCESSO ESTERNI</legend>
                      <!---ACCESSO ESTERNI---------------------------------------------------------------->            
@@ -102,22 +102,10 @@
                   <input type="password" name="outPwd" required>
                </td>
             </tr>
-            <tr>
-                  <td>
-                     <label>Modello: </label>
-                  </td>
-                  <td>
-                        <select name="op" required>
-                              <option selected></option>
-                               <option value="incassiore">INCASSI E ORE (settimanali)</option>
-                               <option value="differenze">MOD. 140</option>
-                               <option value="rifiuti">MOD. 54</option>
-                               <option value="manutenzioni">MOD. 23</option>
-                            </select>
-                  </td>
-               </tr>
                <tr>
-                  <td></td>
+                  <td>
+                     <!--IL MENU DI SCELTA DEL MODELLO COMPARE AD ACCESSO EFFETTUATO-->
+                  </td>
                   <td>
                         <input type="submit" value="Accesso esterni"><!--bottone accesso esterni-->
                   </td>
