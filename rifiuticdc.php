@@ -28,6 +28,8 @@
 </head>
 
 <body>
+<?php include 'backtomenu.html'; ?>
+
 <h2>FORMULARIO RIFIUTI</h2>
 <p>D.Lgs. del 5-2-97 n°22 (Art.15 e successive modifiche ed integrazioni) D.M. del 1-4-98 n°145
   Direttiva ministero ambiente 9-4-2002.
@@ -85,8 +87,8 @@
 </form>
 
 
-<script>
-
+<!--<script>
+/////////////////////////////MEGLIO GESTIRE LA COSA LATO SERVER!!!!
   function getDate()
   {
     var today = new Date();
@@ -108,7 +110,7 @@
 
     $("oratrasp").val(today);
   }
-</script>
+</script>-->
 </body>
 </html>
 

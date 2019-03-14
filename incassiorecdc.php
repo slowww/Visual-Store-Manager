@@ -1,6 +1,7 @@
 <html>
 <head>
 
+
 <style>
 
 html { font-family: sans-serif; background-color: #4169E1;}
@@ -16,6 +17,7 @@ table {
 
 
 <body>
+  <?php include 'backtomenu.html'; ?>
   <form name="ic" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
   <table border="1">
     <tr>
@@ -34,7 +36,8 @@ table {
       <td><input type="number" maxlength="1" size="1" name="rid"></td>
       <td><input type="number" maxlength="3" size="3" name="fe"></td>
       <td><input type="number" maxlength="3" size="3" name="pr"></td>
-      <td><input maxlength="3" size="3" name="tot">
+      <td><input maxlength="3" size="3" id="tot">
+          <button type="button" onclick="total()">CALCOLA</button>
       </td>
     </tr>
     <tr>
@@ -75,36 +78,22 @@ table {
 
 <script>
 
-//$(document).ready(function(){
+    function total() {
+
+            var arr = $("#primo ['type=number']");
+            var replace = new Array();
+            var tot=0;
+            for(var i=0;i<arr.length;i++){
+                replace = arr[i].value;
+                if(parseInt(arr[i].value))
+                {tot += parseInt(arr[i].value);}
+
+                $("#primo ['type=number']")[i].text(replace[i]);
 
 
-
-
-      //var tot = parseInt(document.getElementsByName("tot").value);
-
-      //tot += x;
-
-      
-
-      $("#primo input").keyup(function() {
-      var risultato = 0;
-      var array = $("#primo input");
-        for(var i=0; i<array.length;i++){
-        var temp = array[i];
-        if(temp.value != ""){
-            risultato += parseInt(temp.value);
+            }
+            document.getElementById('tot').value = tot;
         }
-      }
-        document.getElementById("output").innerText = risultato;
-          /*var field = document.ic.tot.value;
-          field = eval(field + $(this).val());*/
-      })
-      //document.getElementsByName("tot").innerHTML = x;
-
-
-
-  //});
-
 
 </script>
 </body>

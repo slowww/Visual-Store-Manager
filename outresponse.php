@@ -27,6 +27,7 @@ if(!$conn)
     </style>
 </head>
 <body>
+<?php include 'backtomenu.html'; ?>
 
 <h2>BENVENUTO, <?php 
 
@@ -55,11 +56,12 @@ while($row=mysqli_fetch_row($result))
 mysqli_close($conn);?>*/
 ?></h2>
 
+<form action="searchmod" method="POST">
 <table>
 <tr><td>CDC</td><td>MODELLO</td><td>MESE</td></tr>
 <tr>
   <td>
-    <select>
+    <select required name="cdc">
       <?php
         $query="SELECT cdc, citta_cdc FROM cdc";
 
@@ -75,7 +77,7 @@ mysqli_close($conn);?>*/
     </select>
   </td>
   <td>
-    <select>
+    <select name="outmod">
       <option>INCASSI&ORE</option>
       <option>MOD.54 (rifiuti)</option>
       <option>MOD.23 (manutenzioni)</option>
@@ -83,8 +85,19 @@ mysqli_close($conn);?>*/
     </select>
   </td>
   <td>
-  <input type="month" value="<?php echo Date("Y"); ?>">
+  <input type="month" value="<?php echo Date("Y"); ?>" name="outmese">
   </td>
+</tr>
+<tr>
+  <td><input type="submit" value="RICERCA" name="ricerca"></td>
+</tr>
+
+
+
+
+
+
+
 
 
 <?php mysqli_close($conn); ?>

@@ -1,3 +1,14 @@
+<?php
+if(isset($_GET["queryresult"])&&$_GET["queryresult"]=="false")
+{
+   echo '<script language="javascript">';
+  echo 'alert("Nessuna corrispondenza trovata. Ritenta laccesso.")';
+  echo '</script>';
+}
+
+
+?>
+
 <html>
    <head>
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -37,12 +48,7 @@
                      </td>
                      <td>
                        <input type="text" name="cdc" maxlength="6" placeholder="Es.cdc434" required>
-                      <!--  <select name="cdc">
-                          <option selected></option>
-                           <option>CDC 434</option>
-                           <option>CDC 402</option>
-                           <option>CDC 401</option>
-                        </select>-->
+
                      </td>
                   </tr>
                   <tr>

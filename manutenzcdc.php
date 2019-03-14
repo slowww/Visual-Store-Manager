@@ -12,6 +12,8 @@ $("document").ready(function(){
 </head>
 
 <body>
+<?php include 'backtomenu.html'; ?>
+
 <h2>INTERVENTO DI MANUTENZIONE</h2>
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
     <table border="1">
