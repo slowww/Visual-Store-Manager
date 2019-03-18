@@ -1,3 +1,13 @@
+<?php
+
+$conn= new mysqli("localhost","root","","vsm_db");
+if ($conn->connect_error) {
+    die("Connessione col db non riuscita: " . $conn->connect_error);
+}
+
+
+?>
+
 <html>
 <head>
   <style>
@@ -30,6 +40,9 @@
 <body>
 <?php include 'backtomenu.html'; ?>
 
+
+
+
 <h2>FORMULARIO RIFIUTI</h2>
 <p>D.Lgs. del 5-2-97 n°22 (Art.15 e successive modifiche ed integrazioni) D.M. del 1-4-98 n°145
   Direttiva ministero ambiente 9-4-2002.
@@ -38,8 +51,24 @@
   <table border="1">
     <tr><td colspan="2">Data: <?php echo date("d/m/Y")?> Ora: <?php echo date("h:i:sa")?></td></tr><!--cambiare formato ora-->
     <tr><td colspan="2">Produttore/detentore: In's Mercato S.p.A. <!--dati societari--></td></tr>
-    <tr><td colspan="2">Destinatario: B&M S.r.l. - Via Emilio Brasca, 137 Trezzo sull'Adda(MI)
-            C.F. 03431030166 - N°Aut./Albo: 4355/2016 del 17/5/2016</td></tr>
+    <tr><td colspan="2">Destinatario:
+            <select name="depo">
+                <?php $stmt = $conn->prepare("SELECT p_iva,nome_ditta,citta_ditta,ind_ditta FROM ditta_esterna;");
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                        echo "<option>P.I.: " . $row['p_iva'] . " - " . $row['nome_ditta'] . " - " . $row['citta_ditta'] . " - " . $row['ind_ditta'] ."</option>";
+                    }
+                }else{
+                    echo "#no_data#";
+                }
+
+
+                ?>
+            </select>
+            </td></tr>
     <tr><td>Trasportatore:</td>
       <td>
       <select name="trans">

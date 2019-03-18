@@ -1,7 +1,17 @@
-<?php $conn = mysqli_connect("localhost","root","", "vsm_db");
+<?php
+
+$conn= new mysqli("localhost","root","","negozio");
+
+
+
+if ($conn->connect_error) {
+    die("Connessione col db non riuscita: " . $conn->connect_error);
+}
 
 $email = $_POST["email"];
 $pwd = $_POST["outPwd"];
+
+
 
 //echo $email; debug
 //echo $pwd; debug
