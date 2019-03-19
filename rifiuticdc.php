@@ -50,7 +50,21 @@ if ($conn->connect_error) {
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
   <table border="1">
     <tr><td colspan="2">Data: <?php echo date("d/m/Y")?> Ora: <?php echo date("h:i:sa")?></td></tr><!--cambiare formato ora-->
-    <tr><td colspan="2">Produttore/detentore: In's Mercato S.p.A. <!--dati societari--></td></tr>
+    <tr><td colspan="2">Produttore/detentore: In's Mercato S.p.A.
+            <?php $stmt = $conn->prepare("SELECT cdc FROM cdc WHERE cdc=?;");
+            $stmt->bind_param('s',$GLOBALS['cdc']);
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                        echo "<option>" . $row['cdc'] . "</option>";
+                    }
+                }else{
+                    echo "#no_data#";
+                }?>
+
+        </td></tr>
     <tr><td colspan="2">Destinatario:
             <select name="depo">
                 <?php $stmt = $conn->prepare("SELECT p_iva,nome_ditta,citta_ditta,ind_ditta FROM ditta_esterna;");
@@ -71,31 +85,39 @@ if ($conn->connect_error) {
             </td></tr>
     <tr><td>Trasportatore:</td>
       <td>
-      <select name="trans">
-        <option selected></option>
-        <?php
-          /*scorre la tabella dei trasportatori sul database
-          recupera la ragione sociale e per ciascuna crea una <option>
+          <select name="trans">
+              <?php $stmt = $conn->prepare("SELECT p_iva,nome_ditta,citta_ditta,ind_ditta FROM ditta_esterna;");
+              $stmt->execute();
+              $result = $stmt->get_result();
 
-          alla selezione della option, verranno stampati tutti i dati relativi al trasportatore
-          */
-        ?>
-      </select></td></tr>
+              if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                      echo "<option>P.I.: " . $row['p_iva'] . " - " . $row['nome_ditta'] . " - " . $row['citta_ditta'] . " - " . $row['ind_ditta'] ."</option>";
+                  }
+              }else{
+                  echo "#no_data#";
+              }
+
+
+              ?>
+          </select>
+      </td></tr>
       <tr><td>Annotazioni: </td><td><input type="text" name="annotazioni"></td></tr>
 
-      <tr><td>Trasporto sottoposto ad/rid </td><td><input type="checkbox"></td></tr>
+      <tr><td>Trasporto sottoposto ad/rid </td><td><input type="checkbox" name="adrid"></td></tr>
       <tr><td>Carta e cartone (cod. Europeo 15.01.01)</td><td><input type="checkbox" name="cartone"></td></tr>
       <tr><td>Imballaggi in plastica (cod. Europeo 15.01.02)</td><td><input type="checkbox" name="plast"></td></tr><!--SE SI SELEZIONA UNO, L'ALTRO SI DESELEZIONA!!!!-->
-      <tr><td>Stato fisico</td><td><select name="stato">
+      <tr><td>Stato fisico</td><td><select name="statofisico">
                               <option selected></option>
-                               <option value="uno">1</option>
+                               <option value="uno">1</option><!--necessario name?-->
                                <option value="due">2</option>
                                <option value="tre">3</option>
                                <option value="quattro">4</option>
                             </select></td></tr>
                   
       <tr><td>Quantità (in kg): </td><td><input type="number" name="qty"></td></tr>
-      <tr><td>Destinazione del rifiuto: </td><td><select name="destrif">
+      <tr><td>Destinazione del rifiuto: </td>
+                            <td><select name="destrif">
                               <option selected></option>
                                <option value="rec">Recupero</option>
                                <option value="smal">Smaltimento</option>
@@ -108,42 +130,28 @@ if ($conn->connect_error) {
       <tr><td>Targa automezzo: </td><td><input type="text" name="targa"></td></tr>
       <tr><td>Targa rimorchio: </td><td><input type="text" name="rimo"></td></tr>
       <tr><td>Cognome e nome conducente: </td><td><input type="text" name="trasportatore"></td></tr>
-      <tr><td>Data inizio trasporto: <input type="submit" value="DATA" onclick="getDate()"></td><td id="datatrasp"></td></tr>
-      <tr><td>Ora inizio del trasporto: <input type="submit" value="ORA" onclick="getHour()"></td><td id="oratrasp"></td></tr>
-      <tr><td>ID&password compilatore: </td><td><input type="text" name="user" placeholder="id"><input type="password" name="pwd" placeholder="password"></td></tr>
+      <tr><td>Data inizio trasporto: </td><td><input type="text" name="oratrasp" value="<?php echo date('d/m/Y')?>"></td></tr>
+      <tr><td>Ora inizio del trasporto: </td><td><input type="text" name="datatrasp" value="<?php echo date('h:i:sa')?>"></td></tr>
+      <tr><td>ID&password compilatore: </td><td><input type="text" name="user" placeholder="id" required><input type="password" name="pwd" placeholder="password" required></td></tr>
   </table>
 <input type="submit" value="INVIA">
 </form>
 
 
-<!--<script>
-/////////////////////////////MEGLIO GESTIRE LA COSA LATO SERVER!!!!
-  function getDate()
-  {
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth() + 1; //January is 0!
-
-    var today = dd + '/' + mm + '/' + yyyy;
-
-    $("datatrasp").val(today);
-  }
-
-  function getHour()
-  {
-    var today = new Date();
-    var hh = today.getHours();
-    var mm = today.getMinutes();
-
-    var today = hh + ':' + mm;
-
-    $("oratrasp").val(today);
-  }
-</script>-->
 </body>
 </html>
 
 
+
 <?php
 include("autenticazione.php");
+?>
+
+
+
+
+<?php
+$stmt->close();
+$conn->close();
+?>
 ?>

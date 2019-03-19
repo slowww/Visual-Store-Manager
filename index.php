@@ -1,13 +1,11 @@
 <?php
-if(isset($_GET["queryresult"])&&$_GET["queryresult"]=="false")
-{
-   echo '<script language="javascript">';
-  echo 'alert("Nessuna corrispondenza trovata. Ritenta laccesso.")';
-  echo '</script>';
-}
+if($_GET['errmsg']=="1")
+{ ?>
+    <script>
+        alert('Nessuna operazione selezionata!');
+    </script>
 
-
-?>
+<?php } ?>
 
 <html>
    <head>

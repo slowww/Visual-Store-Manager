@@ -1,18 +1,12 @@
 <?php
-/*$conn= new mysqli("localhost","root","","vsm_db");
-if ($conn->connect_error) {
-    die("Connessione col db non riuscita: " . $conn->connect_error);
-}*/
-
-
 if(isset($_POST["submit"]))
 {
-    $id_dip=$_POST["user"]; //nome.cognome dipendente
-    $pwd_dip=$_POST["pwd"];
+    $cdc=$_POST["cdc"]; //nome.cognome dipendente
+    $cdc_pwd=$_POST["cdcPwd"];
 
     /*query sql per verificare che i dati inseriti dal dipendente corrispondano a quelli presente nel db*/
 
-    $stmt = $conn->prepare("SELECT id_dip,pwd_dip FROM dipendenti WHERE id_dip=$id_dip AND pwd_dip=$pwd_dip;");
+    $stmt = $conn->prepare("SELECT cdc,cdc_pwd FROM dipendenti WHERE cdc=$cdc AND cdc_pwd=$cdc_pwd;");
     $stmt->execute();
     $result = $stmt->get_result();
 
@@ -28,10 +22,3 @@ if(isset($_POST["submit"]))
 
 
 }
-
-
-
-
-
-
-?>
