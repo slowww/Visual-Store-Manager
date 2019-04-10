@@ -5,7 +5,7 @@ $outmod=$_POST["outmod"];
 $outmese=$_POST["outmese"];
 
 
-$query="SELECT id_mod, data_mod FROM modelli WHERE cdc_fk='$cdc' AND descr_mod='$outmod'" //AND il mese della data del modello è uguale a $outmese
+$query="SELECT id_mod, data_mod FROM modelli WHERE cdc_fk='$cdc' AND descr_mod='$outmod'"; //AND il mese della data del modello è uguale a $outmese
 
 if ($result=mysqli_query($conn,$query))
   {

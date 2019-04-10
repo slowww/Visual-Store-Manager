@@ -1,16 +1,19 @@
 <?php
-if($_GET['errmsg']=="1")
-{ ?>
+if(isset($_GET['errmsg']))
+{
+   if($_GET['errmsg']=="1")
+   { ?>
     <script>
-        alert('Nessuna operazione selezionata!');
+        alert('ERRORE!');
     </script>
+   <?php } ?>
 
 <?php } ?>
 
 <html>
    <head>
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.min.js"></script>
+    
       <style>
          html { font-family: sans-serif; background-color: #4169E1;}
          #negozi {

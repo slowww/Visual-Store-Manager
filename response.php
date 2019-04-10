@@ -3,6 +3,7 @@ $op=$_POST["op"];
 $cdc=$_POST["cdc"];
 $cdcPwd=$_POST["cdcPwd"];
 
+
 include 'autenticazione_cdc.php';
 
     if(isset($op)){
