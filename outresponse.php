@@ -1,70 +1,43 @@
 <?php
-
-$conn= new mysqli("localhost","root","","negozio");
-
-
-
-if ($conn->connect_error) {
-    die("Connessione col db non riuscita: " . $conn->connect_error);
-}
-
-$email = $_POST["email"];
-$pwd = $_POST["outPwd"];
-
-
-
-//echo $email; debug
-//echo $pwd; debug
-
-
-if(!$conn)
-  {
-    echo '<script language="javascript">';
-    echo 'alert("Connessione col database non riuscita!")';
-    echo '</script>';
-    exit;
-  }
-
-  mysqli_select_db($conn,"vsm_db");
-
+session_start();
+require 'connection.php';
+require("user.php");
 ?>
 
 <html>
 
 <head>
   <style>
-             html { font-family: sans-serif; background-color: #4169E1;}
+      body {
+          background-color: #4169E1;
+          font-family: sans-serif;
+      }
     </style>
 </head>
 <body>
 <?php include 'backtomenu.html'; ?>
 
-<h2>BENVENUTO, <?php 
+<h2>BENVENUTO,
 
-$query = "SELECT nome_dip,cogn_dip FROM dipendenti WHERE id_dip = '$email' AND pwd_dip = '$pwd'";
+    <?php
+    if(isset($_SESSION["access"]))//se è gia settata la sessione utente (ovvero se l'utente si è loggato)
+    {
+        $access = unserialize($_SESSION['access']);
+        $id_dip = $access->getUsername();
+        $pwd_dip = $access->getPwd();
+        $stmt = $conn->prepare("SELECT nome_dip,cogn_dip FROM dipendenti WHERE id_dip = ? AND pwd_dip = ?;");
+        $stmt->bind_param("ss",$id_dip,$pwd_dip);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                echo $row['nome_dip'] . " " . $row['cogn_dip'];
 
-//echo $query; debug
-
-
-if ($result=mysqli_query($conn,$query))
-  {
-    $row=mysqli_fetch_array($result);
-    echo $row['nome_dip'] . " " . $row['cogn_dip'];
-    mysqli_free_result($result);
-  }
-
-
-
-/*
-$result=mysqli_query($conn, $query);
-while($row=mysqli_fetch_row($result))
-{
-  print_r($row);
-}
-
-
-mysqli_close($conn);?>*/
-?></h2>
+            }
+        }
+    }
+    ?>
+</h2>
 
 <form action="searchmod" method="POST">
 <table>
@@ -73,16 +46,15 @@ mysqli_close($conn);?>*/
   <td>
     <select required name="cdc">
       <?php
-        $query="SELECT cdc, citta_cdc FROM cdc";
-
-        if ($result=mysqli_query($conn,$query))
-        {
-            while($row = mysqli_fetch_array($result)){ 
+      $stmt=$conn->prepare("SELECT cdc,citta_cdc FROM cdc;");
+      $stmt->execute();
+      $result=$stmt->get_result();
+      if ($result->num_rows > 0) {
+          while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+              echo $row['cdc'] . " " . $row['citta_cdc'];
               
-                  echo "<option>" . $row['cdc'] . "-" . $row['citta_cdc'] . "</option>";
-            }      
-        } 
-      
+          }
+      }
       ?>
     </select>
   </td>
@@ -103,26 +75,9 @@ mysqli_close($conn);?>*/
 </tr>
 
 
-
-
-
-
-
-
-
 <?php mysqli_close($conn); ?>
 
 
 
 </body>
 </html>
-
-
-
-
-<?php
-
-
-
-
-?>

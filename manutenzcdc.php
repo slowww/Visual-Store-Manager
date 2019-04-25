@@ -1,11 +1,18 @@
+<?php session_start();
+require("user.php");?>
+
 <html>
 
 <head>
 <link rel="stylesheet" type="text/css" href="style.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-$("document").ready(function(){
-    $("comment").hide();
+    //SCRIPT DA RIVEDERE
+$("#altro").toggle(
+    function () {
+        $("#comment").hide();
+    }
+)
 })
 </script>
 
@@ -13,7 +20,7 @@ $("document").ready(function(){
 
 <body>
 <?php include 'backtomenu.html'; ?>
-
+<?php include 'header.php'?>
 <h2>INTERVENTO DI MANUTENZIONE</h2>
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
     <table border="1">

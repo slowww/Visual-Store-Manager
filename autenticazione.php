@@ -1,37 +1,69 @@
 <?php
-/*$conn= new mysqli("localhost","root","","vsm_db");
-if ($conn->connect_error) {
-    die("Connessione col db non riuscita: " . $conn->connect_error);
-}*/
+session_start();
+require 'connection.php';
+require("user.php");
+
+$user=$_POST['user'];
+$pwd=$_POST['pwd'];
+$accesstype=$_POST['accesstype'];
 
 
-if(isset($_POST["submit"]))
+if(isset($user)&&isset($pwd)&&isset($accesstype))
 {
-    $id_dip=$_POST["user"]; //nome.cognome dipendente
-    $pwd_dip=$_POST["pwd"];
+    switch ($accesstype) {
+        case "negozio":
+            mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+            $stmt = $conn->prepare("SELECT * FROM cdc WHERE cdc=? AND cdc_pwd=?");
+            $stmt->bind_param("ss", $user, $pwd);
+            $stmt->execute();
+            $result = $stmt->get_result();
 
-    /*query sql per verificare che i dati inseriti dal dipendente corrispondano a quelli presente nel db*/
 
-    $stmt = $conn->prepare("SELECT id_dip,pwd_dip FROM dipendenti WHERE id_dip=$id_dip AND pwd_dip=$pwd_dip;");
-    $stmt->execute();
-    $result = $stmt->get_result();
+            if ($result->num_rows == 1) {
+                //se login ok, istanzio sessione
 
-    if($result<1)
-    {
-        /*echo "<script>alert('Operazione effettuata correttamente!')</script>";
-    }else
-    {*/
-        die("<script>alert('Non è stato possibile effettuare l&#39;operazione')</script>");
+                $us_obj = new User ($user,$pwd);
+                $_SESSION['access']=serialize($us_obj);
+                switch ($_POST['op']) {
+                    case 'incassiore':
+                        header('Location: incassiorecdc.php');
+                        break;
+                    case 'differenze':
+                        header('Location: differenzecdc.php');
+                        break;
+                    case 'manutenzioni':
+                        header('Location: manutenzcdc.php');
+                        break;
+                }//inner switch
+            } else {
+                header('Location: index.php?errmsg=error');
+            }
+            $stmt->close();
+            $conn->close();
+            break;
+
+        case "esterno":
+            mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+            $stmt = $conn->prepare("SELECT * FROM dipendenti WHERE id_dip=? AND pwd_dip=?");
+            $stmt->bind_param("ss", $user, $pwd);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows == 1) {
+
+                $us_obj = new User ($user,$pwd);
+                $_SESSION['access']=serialize($us_obj);
+                header('Location: outresponse.php');
+            } else {
+                header('Location: index.php?errmsg=error');
+            }
+            break;
     }
+}else
+{
 
-
-
+    header('Location: index2.php?errmsg=error');
+    die();
 
 }
-
-
-
-
-
-
 ?>

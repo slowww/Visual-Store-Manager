@@ -1,0 +1,12 @@
+POST http://localhost:8080/resources?user=cdc434&pwd=cdc434aa&accesstype=negozio&op=incassiore
+Accept: */*
+Cache-Control: no-cache
+
+###
+
+POST http://localhost:8080/resources?user=cdc434&pwd=cdc434aa&accesstype=negozio&op=incassiore
+Accept: */*
+Cache-Control: no-cache
+
+###
+

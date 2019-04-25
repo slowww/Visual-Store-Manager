@@ -1,3 +1,9 @@
+<?php
+session_start();
+require 'connection.php';
+require("user.php");
+?>
+
 <html>
 <head>
 
@@ -18,8 +24,9 @@ table {
 
 <body>
   <?php include 'backtomenu.html'; ?>
+  <?php include 'header.php'; ?>
   <form name="ic" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-  <table border="1">
+  <table>
     <tr>
       <td>Settimana numero</td>
       <td>Ore Tirocinio</td>
@@ -36,7 +43,7 @@ table {
       <td><input type="number" maxlength="1" size="1" name="rid"></td>
       <td><input type="number" maxlength="3" size="3" name="fe"></td>
       <td><input type="number" maxlength="3" size="3" name="pr"></td>
-      <td><input maxlength="3" size="3" id="tot">
+      <td><input maxlength="3" size="3" id="tot" readonly>
           <button type="button" onclick="total()">CALCOLA</button>
       </td>
     </tr>
@@ -79,83 +86,21 @@ table {
 <script>
 
     function total() {
-
-            var arr = $("#primo ['type=number']");
-            var replace = new Array();
-            var tot=0;
-            for(var i=0;i<arr.length;i++){
-                replace = arr[i].value;
-                if(parseInt(arr[i].value))
-                {tot += parseInt(arr[i].value);}
-
-                $("#primo ['type=number']")[i].text(replace[i]);
-
-
+    var total=0;
+    var value=0;
+        $("#primo [type='number']").each(
+            function () {
+                value= parseFloat($(this).val())
+                console.log("cons:"+value);
+                total+=value;
             }
-            document.getElementById('tot').value = tot;
-        }
+        )
+
+        $("#tot").val(total);
+    }
+
 
 </script>
 </body>
 
 </html>
-
-<!--/*
-
-//$dati_io = array('sett' => $_POST['sett'], ... );//verificare sensatezza della soluzione
-
-$sett = $_POST['sett'];
-$tiro = $_POST['tiro'];
-$eff_lav = $_POST['eff'];
-$rid = $_POST['rid'];
-$fe = $_POST['fe'];
-$pr = $_POST['pr'];
-$tot = $_POST['tot'];
-$mal = $_POST['mal'];
-$mat = $_POST['mat'];
-$varie = $_POST['varie'];
-$org = $_POST['org'];
-$ing = $_POST['in'];
-$out = $_POST['out'];
-$str = $_POST['str'];
-$inc = $_POST['inc'];
-$resa = $_POST['resa'];
-
-if(!isset($_POST["submit"]))//se non sono stati compilati tutti i campi restituisci un messaggio d'errore
-{
-  echo '<script language="javascript">';
-  echo 'alert("Dati inseriti incompleti!")';
-  echo '</script>';
-}else {
-  //scrivi i dati sulla relativa tabella nel SQLiteDatabase
-  //OVVERO:
-$connect = mysqli_connect(/*hostname,username,password);
-  if(!$connect)
-  {
-    echo '<script language="javascript">';
-    echo 'alert("Connessione col database non riuscita!")';
-    echo '</script>';
-    exit;
-  }
-
-mysqli_select_db($connect,nome tabella/);
-
-  $insert = "INSERT INTO Incassiore (sett,tiro,eff_lav,rid,fe,pr,tot,mal,mat,varie,org,ing,out,str,inc,resa)";
-  $insert .= "VALUES ('$sett','$tiro','$eff_lav','$rid','$fe','$pr','$tot','$mal','$mat','$varie','$org','$ing','$out','$str','$inc','$resa')";
-
-  if(!$insert)
-  {
-    echo "<script>";
-    echo "alert('Inserimento fallito!')";
-    echo "</script>";
-    exit();
-  }else {
-    echo echo "<script>";
-    echo "alert('Inserimento avvenuto correttamente!')";
-    echo "</script>";
-    mysqli_close($connect);
-  }
-
-}*/-->
-
-

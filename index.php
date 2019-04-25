@@ -1,138 +1,112 @@
 <?php
-if(isset($_GET['errmsg']))
-{
-   if($_GET['errmsg']=="1")
-   { ?>
-    <script>
-        alert('ERRORE!');
-    </script>
-   <?php } ?>
 
-<?php } ?>
+    if(isset($_GET['errmsg'])&&$_GET['errmsg']=="error")
+    {
+        echo "<script>alert('Dati inseriti non corretti. Riprovare!');</script>";
+    }
 
+    if(isset($_GET['logout'])&&$_GET['logout']==1)
+    {
+        unset($_SESSION['access']);
+    }
+
+
+?>
 <html>
-   <head>
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    
-      <style>
-         html { font-family: sans-serif; background-color: #4169E1;}
-         #negozi {
-         padding-top: 20vh;
-         padding-left: 35vw;
-         
-         }
+<head>
+    <title>VISUAL STORE MANAGER</title>
+<style>
 
-        [type=submit]{ margin: auto;}
+    body {
+        background-color: #4169E1;
+        font-family: sans-serif;
+    }
+    #container {
+        padding: 2%;
+        position: relative;
+        left: 32.5vw;
+        top: 15vh;
+        alignment: center;
+        background-color: lightgray;
+        border-radius: 5%;
+        width: 30vw;
+        height: 40vh;
+        text-align: center;
+    }
 
-         #esterni {
-           padding-top: 10vh;
-           padding-left: 35vw;
-         }
+    input[type="text"],input[type="password"]{
+        border-radius: 2%;
+    }
 
-         
-         fieldset {
-           display: inline-block;
-         }
-      </style>
-   </head>
-   <body>
-         
-      <div id="negozi">
-         <form action="response.php" method="post">
-               <fieldset>
-               <!---ACCESSO NEGOZI---------------------------------------------------------------->
-                  <legend>ACCESSO NEGOZI</legend>         
-               <table>
-                  <tr>
-                     <td>
-                        <label>Centro di costo: </label>
-                     </td>
-                     <td>
-                       <input type="text" name="cdc" maxlength="6" placeholder="Es.cdc434" required>
 
-                     </td>
-                  </tr>
-                  <tr>
-                     <td>
-                        <label>Password: </label>
-                     </td>
-                     <td>
-                        <input type="password" name="cdcPwd" required>
-                     </td>
-                  </tr>
-                  <tr>
-                     <td>
-                        <label>Modello: </label>
-                     </td>
-                     <td>
-                           <select name="op" required>
-                                 <option selected></option>
-                                  <option value="incassiore">INCASSI E ORE (settimanali)</option>
-                                  <option value="differenze">MOD. 140</option>
-                                  <option value="rifiuti">MOD. 54</option>
-                                  <option value="manutenzioni">MOD. 23</option>
-                               </select>
-                     </td>
+    #container div {
+        right: 2vw;
+        display: table;
+        align-content: center;
+        margin: 2% 2% 7% 2%;
+        width: 100%;
+        clear: both;
+    }
 
-                  </tr>
-                  <tr>
-                     <td></td>
-                     <td>
-                        <input type="submit" value="Accesso negozio"><!--bottone accesso dipendenti-->
-                     </td>
-                  </tr>
-               </table>
-            </fieldset>
-             </form>
-         
-      </div>
+</style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
 
-      <div id="esterni">
-         <form id="outinput" action="outresponse.php" method="post">
-               <fieldset>
-                     <legend>ACCESSO ESTERNI</legend>
-                     <!---ACCESSO ESTERNI---------------------------------------------------------------->            
-         <table>
-            <tr>
-               <td>
-                  <label>Email: </label>
-               </td>
-               <td>
-                  <input type="email" name="email" required>
-               </td>
-            </tr>
-            <tr>
-               <td>
-                  <label>Password: </label>
-               </td>
-               <td>
-                  <input type="password" name="outPwd" required>
-               </td>
-            </tr>
-               <tr>
-                  <td>
-                     <!--IL MENU DI SCELTA DEL MODELLO COMPARE AD ACCESSO EFFETTUATO-->
-                  </td>
-                  <td>
-                        <input type="submit" value="Accesso esterni"><!--bottone accesso esterni-->
-                  </td>
-               </tr>
-         </table>
-      </fieldset>
-         </form>
-      
+<body>
+
+<h2 align="center">VISUAL <br> STORE <br> MANAGER</h2>
+
+<form method="POST" action="autenticazione.php">
+<div id="container">
+    <div id="user">
+        <label>USER  </label><br>
+        <input type="text" name="user" required>
     </div>
-
-
-
-
-      <br><br>
-
-
-    
+    <div id="pass">
+        <label>PASSWORD  </label><br>
+        <input type="password" name="pwd" required>
     </div>
+    <div id="radio">
+        <label>Negozio</label>
+        <input type="radio" name="accesstype" value="negozio" required>
+        <label>Esterno</label>
+        <input type="radio" name="accesstype" value="esterno" required>
+    </div>
+    <div id="select">
+        <select name="op">
+            <option selected value="incassiore">INCASSI E ORE (settimanali)</option>
+            <option value="differenze">MOD. 140</option>
+            <!--<option value="rifiuti">MOD. 54</option>-->
+            <option value="manutenzioni">MOD. 23</option>
+        </select>
+    </div>
+    <div id="sub">
+        <input type="submit" value="ENTRA">
+    </div>
+</div>
+</form>
+</body>
+</html>
 
+<script>
+    $(function () {
+            $("input[value=esterno]").click(
+                function () {
+                    $("#select").hide('fast');
+                }
+            )
 
+        }
+    )
 
-      </body>
-      </html>
+    $(function () {
+            $("input[value=negozio]").click(
+                function () {
+                    $("#select").show('fast');
+                }
+            )
+
+        }
+    )
+</script>
+
