@@ -7,7 +7,7 @@
 
     if(isset($_GET['logout'])&&$_GET['logout']==1)
     {
-        unset($_SESSION['access']);
+        //unset($_SESSION['access']);//Notice: Undefined variable: _SESSION  ?!?!
     }
 
 
@@ -18,7 +18,7 @@
 <style>
 
     body {
-        background-color: #4169E1;
+        background-color: lightcyan;
         font-family: sans-serif;
     }
     #container {
@@ -32,6 +32,7 @@
         width: 30vw;
         height: 40vh;
         text-align: center;
+
     }
 
     input[type="text"],input[type="password"]{

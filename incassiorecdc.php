@@ -9,23 +9,19 @@ require("user.php");
 
 
 <style>
-
-html { font-family: sans-serif; background-color: #4169E1;}
-
-table {
-  width: 90vw;
-}
-
+    <link href="style.css" type="text/css" rel="stylesheet">
 </style>
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-</head>
 
+</head>
 
 <body>
   <?php include 'backtomenu.html'; ?>
   <?php include 'header.php'; ?>
-  <form name="ic" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+  <form name="ic" action="................................" method="post">
   <table>
     <tr>
       <td>Settimana numero</td>
@@ -62,29 +58,44 @@ table {
       <td><input type="number" maxlength="3" size="3" name="varie"></td>
       <td><input type="number" maxlength="3" size="3" name="org"></td>
       <td><input type="number" maxlength="3" size="3" name="in"></td>
-      <td><input type="number" maxlength="3" size="3" name="out"></td>
+      <td><input type="number" maxlength="3" size="3" name="out" ></td>
       <td><input type="text" disabled="disabled" name="str"></td>
+        <td><input maxlength="3" size="3" id="tot" readonly>
+            <button type="button" onclick="str()">CALCOLA</button>
+        </td>
     </tr>
-    <tr>
+      <tr>
       <td>Incasso</td>
       <td>Resa oraria</td><!--verificare se si puo calcolare attraverso i dati inseriti-->
     </tr>
     <tr>
       <td><input type="number" maxlength="6" size="6" name="inc"></td>
       <td><input type="number" maxlength="3" size="3" name="resa"></td>
-      <td><input type="submit" value="INVIA" name="submit"></td>
     </tr>
-
-
   </table>
+
+  <table id="trasferte">
+      <tr>
+          <td><button type="button" onclick="addTd()">+</button></td>
+      </tr>
+  </table><br>
+
+      <input type="text" name="user" placeholder="ID dipendente"><input type="password" name="pwd" placeholder="password">
+      <input type="submit" value="INVIA" name="submit">
 
 </form>
 
 
 
 
-<script>
 
+
+
+
+
+
+
+<script>
     function total() {
     var total=0;
     var value=0;
@@ -93,13 +104,67 @@ table {
                 value= parseFloat($(this).val())
                 console.log("cons:"+value);
                 total+=value;
+                //funziona ma sistemare calcolo!!!!!!
             }
         )
 
         $("#tot").val(total);
     }
+</script>
+<script>
+    function str() {
+        if(!$("#tot").val())
+        {
+            alert('Per effettuare il calcolo degli straordinari è necessario prima calcolare le ore totali.');
+        }else
+        {
+            var tot = $("#tot").val();
+            var org = $("org").val();
+            var ent = $("in").val();
+            var usc = $("out").val();
 
+            var str = tot - org;
+            int a = (true) ? 
+        }
 
+    }
+</script>
+<script>
+
+        $("input[name=out]").keyup(function(){
+        if($(this).val()) {
+            $("#trasferte").css('visibility','visible');
+            console.log("c'è valore")
+        } else {
+            $("#trasferte").css('visibility','hidden');
+            console.log("no value")
+        }
+
+    });
+</script>
+<script>
+    function addTd() {
+        count=0;
+        for(var i=0;i<$("#trasferte input[placeholder=cognome]").length;i++)
+        {
+            count++;
+        }
+        if(count<5)
+        {
+            $("#trasferte").append("<tr id=row"+count+">");
+            $("#trasferte tr[id=row"+count+"]").append('<td><input type="text" maxlength="6" size="6" name="cogn'+count+'" placeholder="cognome"></td>');
+            $("#trasferte tr[id=row"+count+"]").append('<td><input type="text" maxlength="6" size="6" name="neg'+count+'" placeholder="negozio"></td>');
+            $("#trasferte tr[id=row"+count+"]").append('<td><input type="text" maxlength="6" size="6" name="ore'+count+'" placeholder="ore"></td><td><button type="button" onclick="remTd(this)">-</button></td>');
+            $("#trasferte").append("</tr>");
+        }else
+        {
+            alert('Valore massimo raggiunto.');
+        }
+    }
+
+    function remTd(){
+        $(this).parent("tr").remove();
+    }
 </script>
 </body>
 

@@ -7,12 +7,7 @@ require("user.php");
 <html>
 
 <head>
-  <style>
-      body {
-          background-color: #4169E1;
-          font-family: sans-serif;
-      }
-    </style>
+    <link href="style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <?php include 'backtomenu.html'; ?>
@@ -51,7 +46,7 @@ require("user.php");
       $result=$stmt->get_result();
       if ($result->num_rows > 0) {
           while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
-              echo $row['cdc'] . " " . $row['citta_cdc'];
+              echo "<option>".$row['cdc'] . " " . $row['citta_cdc']."</option>";
               
           }
       }

@@ -1,25 +1,31 @@
 <style>
-    div {
+
+
+    #headerlink {
+
+    }
+    #headerlink:visited { color: black;
+    }
+
+    #headerlink:hover {
+        color: yellow;
+    }
+
+    #header {
         border-radius: 10%;
         background-color:lightgray;
         width: 10vw;
         height: 3vh;
         text-align: center;
         padding: 1%;
+        transition: background-color 2s;
     }
 
-    a {
-
-    }
-    a:visited { color: black;
-    }
-
-    a:hover {
-        color: yellow;
-    }
 </style>
 
-<div>
-    <a href="index.php?logout=1">Torna al menù</a>
+<link rel="stylesheet" type="text/css" href="style.css">
+
+<div id="header">
+    <a id="headerlink" href="index.php?logout=1">Torna al menù</a>
 </div>
 

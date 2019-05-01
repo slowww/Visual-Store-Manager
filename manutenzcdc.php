@@ -12,8 +12,8 @@ $("#altro").toggle(
     function () {
         $("#comment").hide();
     }
-)
-})
+);
+
 </script>
 
 </head>
@@ -22,10 +22,24 @@ $("#altro").toggle(
 <?php include 'backtomenu.html'; ?>
 <?php include 'header.php'?>
 <h2>INTERVENTO DI MANUTENZIONE</h2>
-<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+<form action="manutenz.php" method="post">
     <table border="1">
         <tr><td>Data: <?php echo date("d/m/Y")?></tr>
-        <tr><td>Ditta che esegue l'intervento: </td><td><input type="text" name="ditta"></td></tr>
+        <tr><td>Ditta che esegue l'intervento: </td><td>
+                <select required name="ditta">
+                    <?php
+                    $stmt=$conn->prepare("SELECT nome_ditta FROM ditta_esterna;");
+                    $stmt->execute();
+                    $result=$stmt->get_result();
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                            echo "<option>".$row['nome_ditta']."</option>";
+
+                        }
+                    }
+                    ?>
+                </select>
+            </td></tr>
         <tr><td>Manutenzione: </td>
             <td>
                 <select name="tipoman">
@@ -45,39 +59,21 @@ $("#altro").toggle(
         <tr><td>Osservazioni gestore:</td><td>Intervento soddisfacente <input type="checkbox" name="oss1"><br>
                                             Altro <input id="altro" type="checkbox" unchecked><br>
                                             <textarea id="comment" rows='4' cols='50' name='comment' placeholder='Commento?'></textarea></td></tr>
-
-
-      
-
     </table>
+    <input type="submit">
 </form>
 
 
 </body>
-
-
+</html>
 
 <script>
 
-$('#altro').click(function() {
-    if( $(this).is(':checked')) {
-        $("#comment").show();
-    } else {
-        $("#comment").hide();
-    }
-}); 
-
-
-
- 
-
-
-
-
-
-
-
+    $('#altro').click(function() {
+        if( $(this).is(':checked')) {
+            $("#comment").show();
+        } else {
+            $("#comment").hide();
+        }
+    });
 </script>
-
-
-</html>

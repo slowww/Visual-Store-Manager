@@ -12,6 +12,7 @@ if(isset($user)&&isset($pwd)&&isset($accesstype))
 {
     switch ($accesstype) {
         case "negozio":
+            /*INCLUDERE QUESTA PARTE DI CODICE IN UNO SCRIPT A PARTE CHE GESTISCA SOLO LE AUTENTICAZIONI. DA QUI:*/
             mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
             $stmt = $conn->prepare("SELECT * FROM cdc WHERE cdc=? AND cdc_pwd=?");
             $stmt->bind_param("ss", $user, $pwd);
@@ -23,13 +24,14 @@ if(isset($user)&&isset($pwd)&&isset($accesstype))
                 //se login ok, istanzio sessione
 
                 $us_obj = new User ($user,$pwd);
+                /*A QUI: il metodo ritorna l'oggetto se l'autenticazione è ok altrimenti messaggio d'errore*/
                 $_SESSION['access']=serialize($us_obj);
                 switch ($_POST['op']) {
                     case 'incassiore':
                         header('Location: incassiorecdc.php');
                         break;
                     case 'differenze':
-                        header('Location: differenzecdc.php');
+                        header('Location: diffcdc.php');
                         break;
                     case 'manutenzioni':
                         header('Location: manutenzcdc.php');
