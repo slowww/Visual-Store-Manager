@@ -60,7 +60,7 @@ $("#altro").toggle(
                                             Altro <input id="altro" type="checkbox" unchecked><br>
                                             <textarea id="comment" rows='4' cols='50' name='comment' placeholder='Commento?'></textarea></td></tr>
     </table>
-    <input type="submit">
+    <input type="submit" name="submit_mntz">
 </form>
 
 

@@ -7,21 +7,14 @@ require("user.php");
 <html>
 <head>
 
-
-<style>
     <link href="style.css" type="text/css" rel="stylesheet">
-</style>
-
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-
 </head>
 
 <body>
   <?php include 'backtomenu.html'; ?>
   <?php include 'header.php'; ?>
-  <form name="ic" action="................................" method="post">
+  <form action="" method="post">
   <table>
     <tr>
       <td>Settimana numero</td>
@@ -59,8 +52,7 @@ require("user.php");
       <td><input type="number" maxlength="3" size="3" name="org"></td>
       <td><input type="number" maxlength="3" size="3" name="in"></td>
       <td><input type="number" maxlength="3" size="3" name="out" ></td>
-      <td><input type="text" disabled="disabled" name="str"></td>
-        <td><input maxlength="3" size="3" id="tot" readonly>
+      <td><input maxlength="3" size="3"  name="str" readonly>
             <button type="button" onclick="str()">CALCOLA</button>
         </td>
     </tr>
@@ -80,8 +72,8 @@ require("user.php");
       </tr>
   </table><br>
 
-      <input type="text" name="user" placeholder="ID dipendente"><input type="password" name="pwd" placeholder="password">
-      <input type="submit" value="INVIA" name="submit">
+      <input type="text" name="user_dip" placeholder="ID dipendente"><input type="password" name="pwd_dip" placeholder="password">
+      <input type="submit" value="INVIA" name="submit_io">
 
 </form>
 
@@ -162,10 +154,41 @@ require("user.php");
         }
     }
 
-    function remTd(){
+    function remTd(){//fix needed
         $(this).parent("tr").remove();
     }
 </script>
 </body>
 
 </html>
+
+<?php
+if(isset($_POST["submit_io"]))
+{
+    $user_dip=$_POST['user_dip'];
+    $pwd_dip=$_POST['pwd_dip'];
+
+    $dip= new User($user_dip,$pwd_dip);
+
+    if($dip->aut($user_dip,$pwd_dip))
+    {
+        mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+        //attenzione
+        $stmt = $conn->prepare("INSERT INTO `mod_io`() VALUES ()");
+        $stmt->bind_param();
+        $stmt->execute();
+        if (!$stmt->affected_rows)
+        {
+            print "Errore nell'inserimento :-(";
+        }else
+        {
+            print "Inserimento avvenuto correttamente :-)";
+        }
+        $stmt->close();
+        $conn->close();
+    }else
+    {
+        die("ERRORE. Non è stato possibile salvare il modello.");
+    }
+}
+?>

@@ -1,7 +1,41 @@
-html { font-family: sans-serif; background-color: lightblue;}
-
 input [type=submit] {
 
     width: 5vw;
     height: 8vw;
+}
+
+#trasferte{
+    visibility: hidden;
+}
+
+body {
+    background-color: lightcyan;
+    font-family: sans-serif;
+}
+#container {/*per index*/
+    padding: 2%;
+    position: relative;
+    left: 32.5vw;
+    top: 15vh;
+    alignment: center;
+    background-color: lightgray;
+    border-radius: 5%;
+    width: 30vw;
+    height: 40vh;
+    text-align: center;
+
+}
+
+input[type="text"],input[type="password"],input [type=submit]{
+    border-radius: 2%;
+}
+
+
+#container div {/*per index*/
+    right: 2vw;
+    display: table;
+    align-content: center;
+    margin: 2% 2% 7% 2%;
+    width: 100%;
+    clear: both;
 }

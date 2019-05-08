@@ -14,42 +14,10 @@
 ?>
 <html>
 <head>
+
+        <link href="style.css" type="text/css" rel="stylesheet">
+
     <title>VISUAL STORE MANAGER</title>
-<style>
-
-    body {
-        background-color: lightcyan;
-        font-family: sans-serif;
-    }
-    #container {
-        padding: 2%;
-        position: relative;
-        left: 32.5vw;
-        top: 15vh;
-        alignment: center;
-        background-color: lightgray;
-        border-radius: 5%;
-        width: 30vw;
-        height: 40vh;
-        text-align: center;
-
-    }
-
-    input[type="text"],input[type="password"]{
-        border-radius: 2%;
-    }
-
-
-    #container div {
-        right: 2vw;
-        display: table;
-        align-content: center;
-        margin: 2% 2% 7% 2%;
-        width: 100%;
-        clear: both;
-    }
-
-</style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
