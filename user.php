@@ -17,14 +17,14 @@ class User
         return $this->password;
     }
 
-    function aut($username,$password){
+    function aut(){
         $conn= new mysqli("localhost","root","","vsm_db");
                 if ($conn->connect_error) {
             die("Connessione col db non riuscita: " . $conn->connect_error);
         }
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
         $stmt = $conn->prepare("SELECT * FROM dipendenti WHERE id_dip=? AND pwd_dip=?");
-        $stmt->bind_param("ss", $username, $password);
+        $stmt->bind_param("ss", $this->username, $this->password);
         $stmt->execute();
         $result = $stmt->get_result();
 

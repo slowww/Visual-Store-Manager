@@ -3,6 +3,7 @@
     if(isset($_GET['errmsg'])&&$_GET['errmsg']=="error")
     {
         echo "<script>alert('Dati inseriti non corretti. Riprovare!');</script>";
+
     }
 
     if(isset($_GET['logout'])&&$_GET['logout']==1)
@@ -79,3 +80,7 @@
     )
 </script>
 
+
+<script>
+
+</script>

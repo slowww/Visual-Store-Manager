@@ -14,7 +14,7 @@ require("user.php");
 <body>
   <?php include 'backtomenu.html'; ?>
   <?php include 'header.php'; ?>
-  <form action="" method="post">
+  <form action="op.php" method="post">
   <table>
     <tr>
       <td>Settimana numero</td>
@@ -26,13 +26,13 @@ require("user.php");
       <td>TOT</td><!--riduz oraria + ferie + pr-->
     </tr>
     <tr id="primo">
-      <td> <?php echo date("W"); ?></td>
+      <td> <input type="number" maxlength="2" size="2" name="nrsett" required></td>
       <td><input type="number" maxlength="3" size="3" name="tiro"></td>
-      <td><input type="number" maxlength="3" size="3" name="eff"></td>
+      <td><input type="number" maxlength="3" size="3" name="eff" required></td>
       <td><input type="number" maxlength="1" size="1" name="rid"></td>
       <td><input type="number" maxlength="3" size="3" name="fe"></td>
       <td><input type="number" maxlength="3" size="3" name="pr"></td>
-      <td><input maxlength="3" size="3" id="tot" readonly>
+      <td><input maxlength="3" size="3" id="tot" readonly required>
           <button type="button" onclick="total()">CALCOLA</button>
       </td>
     </tr>
@@ -49,7 +49,7 @@ require("user.php");
       <td><input type="number" maxlength="3" size="3" name="mal"></td>
       <td><input type="number" maxlength="3" size="3" name="mat"></td>
       <td><input type="number" maxlength="3" size="3" name="varie"></td>
-      <td><input type="number" maxlength="3" size="3" name="org"></td>
+      <td><input type="number" maxlength="3" size="3" name="org" required></td>
       <td><input type="number" maxlength="3" size="3" name="in"></td>
       <td><input type="number" maxlength="3" size="3" name="out" ></td>
       <td><input maxlength="3" size="3"  name="str" readonly>
@@ -61,8 +61,8 @@ require("user.php");
       <td>Resa oraria</td><!--verificare se si puo calcolare attraverso i dati inseriti-->
     </tr>
     <tr>
-      <td><input type="number" maxlength="6" size="6" name="inc"></td>
-      <td><input type="number" maxlength="3" size="3" name="resa"></td>
+      <td><input type="number" maxlength="6" size="6" name="inc" required></td>
+      <td><input type="number" maxlength="3" size="3" name="resa" required></td>
     </tr>
   </table>
 
@@ -72,10 +72,11 @@ require("user.php");
       </tr>
   </table><br>
 
-      <input type="text" name="user_dip" placeholder="ID dipendente"><input type="password" name="pwd_dip" placeholder="password">
-      <input type="submit" value="INVIA" name="submit_io">
+      <input type="text" name="id_dip" placeholder="ID dipendente" required><input type="password" name="pwd_dip" placeholder="password" required>
+      <input type="submit" value="INVIA" id="submit_io">
 
 </form>
+
 
 
 
@@ -161,8 +162,34 @@ require("user.php");
 </body>
 
 </html>
+<script>
+    $("#submit_io").click(function(){
 
+        var isbn = $("#isbn").val();
+        var titolo = $("#titolo").val();
+        var autore = $("#autore").val();
+        var casaed = $("#casaed").val();
+        $.ajax({
+            type: "POST",
+            url: "http://localhost/visual_store_manager/io_script.php",
+            data: "isbn=" + isbn + "&titolo=" + titolo + "&autore=" + autore + "&casaed=" + casaed,
+            dataType: "html",
+            success: function()
+            {
+
+                $("#booklist").append("<tr><td>"+isbn+"</td><td>"+titolo+"</td><td>"+autore+"</td><td>"+casaed+"</td></tr>");
+
+
+            },
+            error: function()
+            {
+                alert("Errore nell'inserimento.");
+            }
+        });
+    });
+</script>
 <?php
+/*
 if(isset($_POST["submit_io"]))
 {
     $user_dip=$_POST['user_dip'];
@@ -190,5 +217,5 @@ if(isset($_POST["submit_io"]))
     {
         die("ERRORE. Non è stato possibile salvare il modello.");
     }
-}
+}*/
 ?>
