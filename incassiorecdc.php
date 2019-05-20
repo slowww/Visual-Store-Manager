@@ -14,7 +14,7 @@ require("user.php");
 <body>
   <?php include 'backtomenu.html'; ?>
   <?php include 'header.php'; ?>
-  <form action="op.php" method="post">
+  <form action="io_script.php" method="post" id="form">
   <table>
     <tr>
       <td>Settimana numero</td>
@@ -50,9 +50,9 @@ require("user.php");
       <td><input type="number" maxlength="3" size="3" name="mat"></td>
       <td><input type="number" maxlength="3" size="3" name="varie"></td>
       <td><input type="number" maxlength="3" size="3" name="org" required></td>
-      <td><input type="number" maxlength="3" size="3" name="in"></td>
-      <td><input type="number" maxlength="3" size="3" name="out" ></td>
-      <td><input maxlength="3" size="3"  name="str" readonly>
+      <td><input type="number" maxlength="3" size="3" name="ent"></td>
+      <td><input type="number" maxlength="3" size="3" name="usc" ></td>
+      <td><input maxlength="3" size="3"  id="str" readonly>
             <button type="button" onclick="str()">CALCOLA</button>
         </td>
     </tr>
@@ -62,7 +62,7 @@ require("user.php");
     </tr>
     <tr>
       <td><input type="number" maxlength="6" size="6" name="inc" required></td>
-      <td><input type="number" maxlength="3" size="3" name="resa" required></td>
+      <td><input type="number" maxlength="3" size="3" name="resa" required></td><!--renderlo calcolabile?-->
     </tr>
   </table>
 
@@ -73,7 +73,7 @@ require("user.php");
   </table><br>
 
       <input type="text" name="id_dip" placeholder="ID dipendente" required><input type="password" name="pwd_dip" placeholder="password" required>
-      <input type="submit" value="INVIA" id="submit_io">
+      <input type="submit" value="INVIA" id="submit_io" onclick="ajxSend()">
 
 </form>
 
@@ -163,30 +163,110 @@ require("user.php");
 
 </html>
 <script>
-    $("#submit_io").click(function(){
+    var nrsett, tiro, eff, rid, fe, pr,mal,mat,varie,org,ent,usc,inc,resa;
+    var tot = $("#tot").val();
+    var str = 10//$("#str").val();
+    var id_dip = $("#id_dip").val();
+    var pwd_dip = $("#pwd_dip").val();
+    function ajxSend(){
 
-        var isbn = $("#isbn").val();
-        var titolo = $("#titolo").val();
-        var autore = $("#autore").val();
-        var casaed = $("#casaed").val();
+
+        $("#form input[type=number]").each(function() {
+                switch($(this).attr(name))
+                {
+                    case 'nrsett':
+                        nrsett = $(this).val();
+                        break;
+                    case 'tiro':
+                        if(isNaN(this.value)) {
+                            tiro = this.val(0);
+                        }else{
+                        tiro = $(this).val();}
+                        break;
+                    case 'eff':
+                        eff = $(this).val();
+                        break;
+                    case 'rid':
+                        if(isNaN(this.value)) {
+                            rid = this.val(0);
+                        }else{
+                            rid = $(this).val();}
+                        break;
+                    case 'fe':
+                        if(isNaN(this.value)) {
+                            fe = this.val(0);
+                        }else{
+                            fe = $(this).val();}
+                        break;
+                    case 'pr':
+                        if(isNaN(this.value)) {
+                            pr = this.val(0);
+                        }else{
+                            pr = $(this).val();}
+                        break;
+                    case 'mal':
+                        if(isNaN(this.value)) {
+                            mal = this.val(0);
+                        }else{
+                            mal = $(this).val();}
+                        break;
+                    case 'mat':
+                        if(isNaN(this.value)) {
+                            mat = this.val(0);
+                        }else{
+                            mat = $(this).val();}
+                        break;
+                    case 'varie':
+                        if(isNaN(this.value)) {
+                            varie = this.val(0);
+                        }else{
+                            varie = $(this).val();}
+                        break;
+                    case 'org':
+                        org = $(this).val();
+                        break;
+                    case 'ent':
+                        if(isNaN(this.value)) {
+                            ent = this.val(0);
+                        }else{
+                            ent = $(this).val();}
+                        break;
+                    case 'usc':
+                        if(isNaN(this.value)) {
+                            usc = this.val(0);
+                        }else{
+                            usc = $(this).val();}
+                        break;
+                    case 'inc':
+                            inc = $(this).val();
+                        break;
+                    case 'resa':
+                           resa = $(this).val();
+                        break;
+                }//switch
+            }//each
+
+
+
         $.ajax({
             type: "POST",
             url: "http://localhost/visual_store_manager/io_script.php",
-            data: "isbn=" + isbn + "&titolo=" + titolo + "&autore=" + autore + "&casaed=" + casaed,
+            data: "nrsett="+nrsett+"&tiro="+tiro+"&eff="+eff+"&rid="+rid+"&fe="+fe+"&pr="+pr+"&mal="+mal+"&mat="+mat+"&varie="+varie+"&org="+org+"&ent"+ent+"&usc="+usc+"&inc="+inc+"&resa="+resa+"&tot="+tot+"&str="+str+"&id_dip="+id_dip+"&pwd_dip="+pwd_dip,
             dataType: "html",
             success: function()
             {
 
-                $("#booklist").append("<tr><td>"+isbn+"</td><td>"+titolo+"</td><td>"+autore+"</td><td>"+casaed+"</td></tr>");
+                alert('Modello inviato correttamente!');
 
 
             },
             error: function()
             {
-                alert("Errore nell'inserimento.");
+                alert("Errore nell'invio del modello.");
             }
         });
-    });
+    }//ajxSend
+
 </script>
 <?php
 /*
