@@ -36,8 +36,7 @@ function insertIo($p)
     $str=0;
     $inc=0;
     $resa=0;
-    $id_dip=0;
-    $pwd_dip=0;
+
     foreach ($p as $k => $v) {
         switch ($k) {
             case "nrsett":
@@ -133,8 +132,11 @@ function insertIo($p)
                 break;
             case "pwd_dip":
                 $pwd_dip = $v;
+                break;
         }
     }
+
+
 
 
 
@@ -157,19 +159,19 @@ function insertIo($p)
         $stmt->execute();
         if ($stmt->affected_rows==1)
         {
-            var_dump($stmt->affected_rows);
-            $msg=(object) array('response code'=>'200');
+            //var_dump($stmt->affected_rows);
+            $msg=(object) array('response_code'=>'200');
             echo json_encode($msg);
         }else
         {
-            var_dump($stmt->affected_rows);
-            $msg=(object) array('response code'=>'400');
+            //var_dump($stmt->affected_rows);
+            $msg=(object) array('response_code'=>'401');
             echo json_encode($msg);
         }
 
     }else
     {   //se autenticazione va male
-        $msg=(object) array('Dati inseriti non corretti.');
+        $msg=(object) array('response_code'=>'400');
         echo json_encode($msg);
     }
 

@@ -4,6 +4,11 @@ input [type=submit] {
     height: 8vw;
 }
 
+input[type="number"]
+{
+    width: 50%;
+}
+
 #trasferte{
     visibility: hidden;
 }
@@ -26,10 +31,27 @@ body {
 
 }
 
-input[type="text"],input[type="password"],input [type=submit]{
+input[type="text"],input[type="password"],input[type=submit]{
     border-radius: 2%;
 }
 
+#modelcontainer{
+    padding: 0.5%;
+    position: relative;
+    left: 15vw;
+    top: -3vh;
+    bottom: 20vh;
+    background-color: lightgray;
+    border-radius: 2%;
+    width: fit-content;
+    height: fit-content;
+    overflow-x: auto;
+
+}
+
+#header{
+    overflow-x: auto;
+}
 
 #container div {/*per index*/
     right: 2vw;
@@ -38,4 +60,12 @@ input[type="text"],input[type="password"],input [type=submit]{
     margin: 2% 2% 7% 2%;
     width: 100%;
     clear: both;
+}
+
+table td{
+    white-space: nowrap;
+}
+
+table {
+    display:inline-block;
 }
