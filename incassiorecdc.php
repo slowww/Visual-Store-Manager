@@ -19,44 +19,46 @@ require("user.php");
     <form method="post" id="form">
         <table>
             <tr>
-                <td>Settimana numero</td>
                 <td>Ore Tirocinio</td>
                 <td>Ore eff. lavorate</td>
                 <td>Riduz. oraria</td>
                 <td>Ferie</td>
                 <td>Permessi retr.</td>
-                <td>TOT</td><!--riduz oraria + ferie + pr-->
             </tr>
-            <tr id="primo">
-                <td> <input type="number" maxlength="2" size="2" name="nrsett" required></td>
+            <tr class="primo">
                 <td><input type="number" maxlength="3" size="3" name="tiro"></td>
                 <td><input type="number" maxlength="3" size="3" name="eff" required></td>
                 <td><input type="number" maxlength="1" size="1" name="rid"></td>
                 <td><input type="number" maxlength="3" size="3" name="fe"></td>
                 <td><input type="number" maxlength="3" size="3" name="pr"></td>
-                <td><input maxlength="3" size="3" id="tot" readonly required>
-                    <button type="button" onclick="total()">CALCOLA</button>
-                </td>
             </tr>
             <tr>
                 <td>Malattia</td>
                 <td>Maternità</td>
                 <td>Varie</td>
+                <td>TOT</td>
+                <td></td>
+            </tr>
+            <tr class="primo">
+                <td><input type="number" maxlength="3" size="3" name="mal"></td>
+                <td><input type="number" maxlength="3" size="3" name="mat"></td>
+                <td><input type="number" maxlength="3" size="3" name="varie"></td>
+                <td><input maxlength="3" size="3" id="tot" readonly required></td>
+                <td><button type="button" onclick="total()">CALCOLA</button></td>
+            </tr>
+            <tr>
                 <td>ORGANICO</td>
                 <td>In entrata</td>
                 <td>In uscita</td>
                 <td>STRAORDINARIO</td><!--verificare calcolo-->
             </tr>
             <tr>
-                <td><input type="number" maxlength="3" size="3" name="mal"></td>
-                <td><input type="number" maxlength="3" size="3" name="mat"></td>
-                <td><input type="number" maxlength="3" size="3" name="varie"></td>
+
                 <td><input type="number" maxlength="3" size="3" name="org" required></td>
-                <td><input type="number" maxlength="3" size="3" id="ent"></td>
+                <td><input type="number" maxlength="3" size="3" name="ent"></td>
                 <td><input type="number" maxlength="3" size="3" name="usc" ></td>
-                <td><input maxlength="3" size="3"  id="str" readonly>
-                    <button type="button" onclick="str()">CALCOLA</button>
-                </td>
+                <td><input maxlength="3" size="3"  id="xtr" readonly></td>
+                <td><button type="button" onclick="str()">CALCOLA</button></td>
             </tr>
             <tr>
                 <td>Incasso</td>
@@ -68,16 +70,18 @@ require("user.php");
             </tr>
         </table>
 
+        <div id="trasf_table">
         <table id="trasferte">
             <tr>
                 <td><button type="button" onclick="addTd()">+</button></td>
             </tr>
-        </table><br>
-
-        <input type="text" name="id_dip" placeholder="ID dipendente" required><input type="password" name="pwd_dip" placeholder="password" required>
-
+        </table>
+        </div><br>
+        <div id="aut">
+        <input type="text" name="id_dip" placeholder="ID dipendente" required><br><br>
+        <input type="password" name="pwd_dip" placeholder="password" required><br><br>
         <input type="button" value="INVIA" id="submit_io" onclick="ajxSend()">
-
+        </div>
     </form>
     </div>
 
@@ -95,35 +99,54 @@ require("user.php");
         function total() {
             var total=0;
             var value=0;
-            $("#primo [type='number']").each(
+            $(".primo [type='number']").each(
                 function () {
-                    value= parseFloat($(this).val())
-                    console.log("cons:"+value);
+                    if(!$(this).val())
+                    {
+                        value=0;
+                    }else {
+                        if ($(this).val() < 0) {
+                            alert('Uno dei valori inseriti non è corretto.');
+                            return;//RITORNA COMUNQUE IL VALOREEEEEEEEEEEEE!!! NON DOVREBBE!!!!
+                        } else {
+                            value = parseFloat($(this).val());
+                        }
+                    }
                     total+=value;
-                    //funziona ma sistemare calcolo!!!!!!
                 }
-            )
+            );//each
             $("#tot").val(total);
         }
     </script>
     <script>
-       /* function str() {
-            if(!$("#tot").val())
+        function resah() {
+
+
+        }
+    </script>
+    <script>
+       function str() {
+           //tot - org -ent + usc
+            if(!$("#tot").val()||!$("[name='org']").val())
             {
-                alert('Per effettuare il calcolo degli straordinari è necessario prima calcolare le ore totali.');
+                alert('Inserire i valori: TOTALE, ORGANICO.');
             }else
             {
                 var tot = $("#tot").val();
-                var org = $("org").val();
-                var ent = $("in").val();
-                var usc = $("out").val();
-                var str = tot - org;
-                int a = (true) ?
+                var org = $("[name='org']").val();
+                var ent = $("[name='ent']").val();
+                var usc = parseInt($("[name='usc']").val());
+                console.log(tot);
+                console.log(org);
+                console.log(ent);
+                console.log(usc);
+                var xtr = (tot-org-ent)+usc;
+                $("#xtr").val(xtr);
             }
-        }*/
+        }
     </script>
     <script>
-        $("input[name=out]").keyup(function(){
+        $("input[name=usc]").keyup(function(){
             if($(this).val()) {
                 $("#trasferte").css('visibility','visible');
                 console.log("c'è valore")

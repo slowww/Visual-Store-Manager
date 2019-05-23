@@ -20,7 +20,7 @@ switch($_SERVER['REQUEST_METHOD'])
 function insertIo($p)
 {
     $conn= new mysqli("localhost","root","","vsm_db");
-    $nrsett=0;
+    $nrsett= date('W');
     $tiro=0;
     $eff=0;
     $rid=0;
@@ -39,9 +39,7 @@ function insertIo($p)
 
     foreach ($p as $k => $v) {
         switch ($k) {
-            case "nrsett":
-                $nrsett = $v;
-                break;
+
             case "tiro":
                 if (isset($v)) {
                     $tiro = $v;

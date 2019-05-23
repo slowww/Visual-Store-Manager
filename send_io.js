@@ -1,9 +1,9 @@
 function ajxSend(){
     var tot = $("#tot").val();
-    var str = 10; //$("#str").val();
+    var str = $("#xtr").val();
     var id_dip = $("[name='id_dip']").val();
     var pwd_dip = $("[name='pwd_dip']").val();
-    var nrsett = $("[name='nrsett']");
+    var nrsett = $("[name='nrsett']").val();
     var tiro = $("[name='tiro']").val();
     var eff = $("[name='eff']").val();
     var rid = $("[name='rid']").val();
@@ -13,7 +13,7 @@ function ajxSend(){
     var mat = $("[name='mat']").val();
     var varie = $("[name='varie']").val();
     var org = $("[name='org']").val();
-    var ent = document.getElementById("ent").value;
+    var ent = $("[name='ent']").val();
     var usc = $("[name='usc']").val();
     var inc = $("[name='inc']").val();
     var resa = $("[name='resa']").val();
@@ -104,12 +104,20 @@ function ajxSend(){
         dataType: "json",
         success: function(data)
         {
-            if(data.response_code=='200')
+            switch(data.response_code)
             {
-                alert('Modello inviato correttamente!');
+                case '200':
+                    alert('Modello inserito correttamente!');
+                    break;
+                case '401':
+                    alert("Errore nell'inserimento del modello!");
+                    break;
+                case '400':
+                    alert("Credenziali inserite errate: utente " + id_dip + " non presente nel database.");
+                    break;
             }
-            //
+
         },
-        
+
     });
 }//ajxSend
