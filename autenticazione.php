@@ -8,6 +8,7 @@ $pwd=$_POST['pwd'];
 $accesstype=$_POST['accesstype'];
 
 
+
 if(isset($user)&&isset($pwd)&&isset($accesstype))
 {
     $us_obj = new User ($user,$pwd);

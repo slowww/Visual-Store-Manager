@@ -41,82 +41,82 @@ function insertIo($p)
         switch ($k) {
 
             case "tiro":
-                if (isset($v)) {
-                    $tiro = $v;
-                } else {
+                if (is_nan($v)) {
                     $tiro = 0;
+                } else {
+                    $tiro = $v;
                 }
                 break;
             case "eff":
                 $eff = $v;
                 break;
             case "rid":
-                if (isset($v)) {
-                    $rid = $v;
-                } else {
+                if (is_nan($v)) {
                     $rid = 0;
+                } else {
+                    $rid = $v;
                 }
                 break;
             case "fe":
-                if (isset($v)) {
-                    $fe = $v;
-                } else {
+                if (is_nan($v)) {
                     $fe = 0;
+                } else {
+                    $fe = $v;
                 }
                 break;
             case "pr":
-                if (isset($v)) {
-                    $pr = $v;
-                } else {
+                if (is_nan($v)) {
                     $pr = 0;
+                } else {
+                    $pr = $v;
                 }
                 break;
             case "tot":
                 $tot = $v;
                 break;
             case "mal":
-                if (isset($v)) {
+                if (is_nan($v)) {
                     $mal = $v;
                 } else {
                     $mal = 0;
                 }
                 break;
             case "mat":
-                if (isset($v)) {
-                    $mat = $v;
-                } else {
+                if (is_nan($v)) {
                     $mat = 0;
+                } else {
+                    $mat = $v;
                 }
                 break;
             case "varie":
-                if (isset($v)) {
-                    $varie = $v;
-                } else {
+                if (is_nan($v)) {
                     $varie = 0;
+                } else {
+                    $varie = $v;
                 }
                 break;
             case "org":
                 $org = $v;
                 break;
             case "ent":
-                if (isset($v)) {
-                    $ent = $v;
-                } else {
+                if (is_nan($v)) {
                     $ent = 0;
+                } else {
+                    $ent = $v;
                 }
                 break;
             case "usc":
-                if (isset($v)) {
-                    $usc = $v;
-                } else {
+                if (is_nan($v)) {
                     $usc = 0;
+                } else {
+                    $usc = $v;
                 }
                 break;
             case "str":
-                if (isset($v)) {
-                    $str = $v;
-                } else {
+                if (is_nan($v)) {
                     $str = 0;
+                } else {
+                    $str = $v;
                 }
                 break;
             case "inc":
@@ -137,6 +137,8 @@ function insertIo($p)
 
 
 
+
+    //$pwd_dip = md5($pwd_dip);
 
     $stmt = $conn->prepare("SELECT cdc_fk FROM dipendenti WHERE id_dip like ? AND pwd_dip like ?;");
 

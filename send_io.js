@@ -1,4 +1,5 @@
 function ajxSend(){
+
     var tot = $("#tot").val();
     var str = $("#xtr").val();
     var id_dip = $("[name='id_dip']").val();
@@ -93,10 +94,7 @@ function ajxSend(){
                 break;
         }//switch
     });//each*/
-    console.log(document.getElementById("ent").value);
-    console.log(ent);
-    console.log(id_dip);
-    console.log("fe: "+fe);
+
     $.ajax({
         type: "POST",
         url: "http://localhost/visual_store_manager/io_script.php",
@@ -104,6 +102,7 @@ function ajxSend(){
         dataType: "json",
         success: function(data)
         {
+            console.log(data);
             switch(data.response_code)
             {
                 case '200':
@@ -114,6 +113,9 @@ function ajxSend(){
                     break;
                 case '400':
                     alert("Credenziali inserite errate: utente " + id_dip + " non presente nel database.");
+                    break;
+                default:
+                    alert('boooooo');
                     break;
             }
 

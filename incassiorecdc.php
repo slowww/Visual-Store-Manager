@@ -44,21 +44,21 @@ require("user.php");
                 <td><input type="number" maxlength="3" size="3" name="mat"></td>
                 <td><input type="number" maxlength="3" size="3" name="varie"></td>
                 <td><input maxlength="3" size="3" id="tot" readonly required></td>
-                <td><button type="button" onclick="total()">CALCOLA</button></td>
+                <td><button type="button" onclick="total()">TOTALE</button></td>
             </tr>
             <tr>
                 <td>ORGANICO</td>
                 <td>In entrata</td>
                 <td>In uscita</td>
-                <td>STRAORDINARIO</td><!--verificare calcolo-->
+                <td>STRAORDINARIO</td>
             </tr>
             <tr>
 
                 <td><input type="number" maxlength="3" size="3" name="org" required></td>
                 <td><input type="number" maxlength="3" size="3" name="ent"></td>
                 <td><input type="number" maxlength="3" size="3" name="usc" ></td>
-                <td><input maxlength="3" size="3"  id="xtr" readonly></td>
-                <td><button type="button" onclick="str()">CALCOLA</button></td>
+                <td><input maxlength="3" size="3"  id="xtr" readonly required></td>
+                <td><button type="button" onclick="str()">STRAORDINARIO</button></td>
             </tr>
             <tr>
                 <td>Incasso</td>
@@ -66,7 +66,10 @@ require("user.php");
             </tr>
             <tr>
                 <td><input type="number" maxlength="6" size="6" name="inc" required></td>
-                <td><input type="number" maxlength="3" size="3" name="resa" required></td><!--renderlo calcolabile?-->
+                <td><input type="number" maxlength="3" size="3" name="resa" required></td>
+                <td></td>
+                <td></td>
+                <td><button type="button" onclick="resah()">RESA</button></td>
             </tr>
         </table>
 
@@ -121,6 +124,17 @@ require("user.php");
     <script>
         function resah() {
 
+            if($("#tot").val())
+            {
+                var inc = $("[name='inc']").val();
+                var tot = $("#tot").val();
+                var resa = Math.round(inc / tot);
+                $("[name='resa']").val(resa);
+            }else
+            {
+                alert('Calcolare il valore TOTALE.');
+            }
+
 
         }
     </script>
@@ -136,6 +150,14 @@ require("user.php");
                 var org = $("[name='org']").val();
                 var ent = $("[name='ent']").val();
                 var usc = parseInt($("[name='usc']").val());
+                if(!ent)
+                {
+                    ent=0;
+                }
+                if(!usc)
+                {
+                    usc=0;
+                }
                 console.log(tot);
                 console.log(org);
                 console.log(ent);
