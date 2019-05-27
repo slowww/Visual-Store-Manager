@@ -2,7 +2,7 @@
 
 require 'connection.php';
 
-
+//RIFARE IN AJAX: richiesta GET a cdc.php con i dati della sessione
 $access=unserialize($_SESSION['access']);
 $user = $access->getUsername();
 $stmt = $conn->prepare("SELECT citta_cdc FROM cdc WHERE cdc=?");

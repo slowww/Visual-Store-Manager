@@ -26,11 +26,11 @@ require("user.php");
                 <td>Permessi retr.</td>
             </tr>
             <tr class="primo">
-                <td><input type="number" maxlength="3" size="3" name="tiro"></td>
-                <td><input type="number" maxlength="3" size="3" name="eff" required></td>
-                <td><input type="number" maxlength="1" size="1" name="rid"></td>
-                <td><input type="number" maxlength="3" size="3" name="fe"></td>
-                <td><input type="number" maxlength="3" size="3" name="pr"></td>
+                <td><input type="number" maxlength="3" size="3" name="tiro" min="0"></td>
+                <td><input type="number" maxlength="3" size="3" name="eff" min="0" required></td>
+                <td><input type="number" maxlength="1" size="1" name="rid" min="0"></td>
+                <td><input type="number" maxlength="3" size="3" name="fe" min="0"></td>
+                <td><input type="number" maxlength="3" size="3" name="pr" min="0"></td>
             </tr>
             <tr>
                 <td>Malattia</td>
@@ -40,9 +40,9 @@ require("user.php");
                 <td></td>
             </tr>
             <tr class="primo">
-                <td><input type="number" maxlength="3" size="3" name="mal"></td>
-                <td><input type="number" maxlength="3" size="3" name="mat"></td>
-                <td><input type="number" maxlength="3" size="3" name="varie"></td>
+                <td><input type="number" maxlength="3" size="3" name="mal" min="0"></td>
+                <td><input type="number" maxlength="3" size="3" name="mat" min="0"></td>
+                <td><input type="number" maxlength="3" size="3" name="varie" min="0"></td>
                 <td><input maxlength="3" size="3" id="tot" readonly required></td>
                 <td><button type="button" onclick="total()">TOTALE</button></td>
             </tr>
@@ -54,9 +54,9 @@ require("user.php");
             </tr>
             <tr>
 
-                <td><input type="number" maxlength="3" size="3" name="org" required></td>
-                <td><input type="number" maxlength="3" size="3" name="ent"></td>
-                <td><input type="number" maxlength="3" size="3" name="usc" ></td>
+                <td><input type="number" maxlength="3" size="3" name="org" required min="0"></td>
+                <td><input type="number" maxlength="3" size="3" name="ent" min="0"></td>
+                <td><input type="number" maxlength="3" size="3" name="usc" min="0"></td>
                 <td><input maxlength="3" size="3"  id="xtr" readonly required></td>
                 <td><button type="button" onclick="str()">STRAORDINARIO</button></td>
             </tr>
@@ -65,8 +65,8 @@ require("user.php");
                 <td>Resa oraria</td><!--verificare se si puo calcolare attraverso i dati inseriti-->
             </tr>
             <tr>
-                <td><input type="number" maxlength="6" size="6" name="inc" required></td>
-                <td><input type="number" maxlength="3" size="3" name="resa" required></td>
+                <td><input type="number" maxlength="6" size="6" name="inc" required min="0"></td>
+                <td><input type="number" maxlength="3" size="3" name="resa" required readonly></td>
                 <td></td>
                 <td></td>
                 <td><button type="button" onclick="resah()">RESA</button></td>
@@ -106,7 +106,15 @@ require("user.php");
                 function () {
                     if(!$(this).val())
                     {
-                        value=0;
+                        if($(this).attr("name") === 'eff' )
+                        {
+                            console.log($(this).attr("name"));
+                            alert('Inserire le ore effettivamente lavorate.');
+                            return;//non blocca lo script!
+                        }else
+                        {
+                            value=0;
+                        }
                     }else {
                         if ($(this).val() < 0) {
                             alert('Uno dei valori inseriti non è corretto.');
@@ -124,15 +132,16 @@ require("user.php");
     <script>
         function resah() {
 
-            if($("#tot").val())
+            if(!$("#tot").val()||!$("[name='inc']").val())
             {
+                alert('Sono necessari i valori TOTALE e INCASSO.');
+            }else
+            {
+
                 var inc = $("[name='inc']").val();
                 var tot = $("#tot").val();
                 var resa = Math.round(inc / tot);
                 $("[name='resa']").val(resa);
-            }else
-            {
-                alert('Calcolare il valore TOTALE.');
             }
 
 

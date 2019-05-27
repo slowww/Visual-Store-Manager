@@ -60,6 +60,11 @@ input[type="text"],input[type="password"],input[type=submit]{
     overflow-x: auto;
 }
 
+#result_table tr:hover{
+    background-color: red;
+    cursor: pointer;
+}
+
 #container div {/*per index*/
     right: 2vw;
     display: table;

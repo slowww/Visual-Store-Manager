@@ -1,5 +1,5 @@
 <?php
-
+session_start();
     if(isset($_GET['errmsg'])&&$_GET['errmsg']=="error")
     {
         echo "<script>alert('Dati inseriti non corretti. Riprovare!');</script>";
@@ -82,5 +82,16 @@
 
 
 <script>
-
+/*
+* AJAX per login:
+*
+* recupera user e pwd e op.val()
+* li manda all'api dip per login dipendente, cdc per login negozio
+*
+* api ritorna json con code response
+*
+* lato ajax: controlla code response, e se ok in base a op.val() fa il redirect
+*
+*
+* */
 </script>

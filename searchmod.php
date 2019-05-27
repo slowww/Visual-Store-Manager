@@ -9,7 +9,7 @@ $query="SELECT id_mod, data_mod FROM modelli WHERE cdc_fk='$cdc' AND descr_mod='
 
 if ($result=mysqli_query($conn,$query))
   {
-    //voglio che l'output venga però rediretto sulla pagina precedente (outresponse.php)
+    //voglio che l'output venga però rediretto sulla pagina precedente (esterno.php)
     echo "<table>";
     echo "<tr><td>ID MODELLO</td><td>DATA</td></tr>";
         while($row=mysqli_fetch_array($result))

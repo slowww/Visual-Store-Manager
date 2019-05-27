@@ -54,7 +54,7 @@ if(isset($user)&&isset($pwd)&&isset($accesstype))
 
                 $us_obj = new User ($user,$pwd);
                 $_SESSION['access']=serialize($us_obj);
-                header('Location: outresponse.php');
+                header('Location: esterno.php');
             } else {
                 header('Location: index.php?errmsg=error');
             }
