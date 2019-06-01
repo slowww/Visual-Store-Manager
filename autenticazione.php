@@ -45,7 +45,7 @@ if(isset($user)&&isset($pwd)&&isset($accesstype))
 
         case "esterno":
             mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-            $stmt = $conn->prepare("SELECT * FROM dipendenti WHERE id_dip=? AND pwd_dip=?");
+            $stmt = $conn->prepare("SELECT * FROM dipendenti WHERE id_dip=? AND pwd_dip=? AND cdc_fk is null;");
             $stmt->bind_param("ss", $user, $pwd);
             $stmt->execute();
             $result = $stmt->get_result();

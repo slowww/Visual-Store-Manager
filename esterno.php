@@ -9,6 +9,7 @@ require("user.php");
 <head>
     <link href="style.css" rel="stylesheet" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 </head>
 <body>
 <?php include 'backtomenu.html'; ?>
@@ -87,10 +88,13 @@ require("user.php");
 <tr>
     <td><button onclick="ricercamod()">RICERCA</button></td>
 </tr>
+</table>
 
 
 
 <div id="result"></div>
+
+<div id="pop"></div>
 
 
 
@@ -135,10 +139,10 @@ require("user.php");
             success: function (data) {
                 if(data.msg)
                 {
-                    $("#result").append(data.msg);
+                    alert(data.msg);
                 }else {
                     console.log(data);
-                    $("#result").append('<table id="result_table" border=1><tr><td>ID MODELLO</td><td>DATA</td></tr>');
+                    $("#result").append('<table id="result_table"><thead><tr><th>ID MODELLO</th><th>DATA</th></tr></thead>');
                     $.each(data, function (i, dato) {
                         $("#result_table").append('<tr><td class="id_mod">' + dato.id_mod_io + '</td><td class="data_mod">' + dato.data_io + '</td></tr>');
 
@@ -154,34 +158,63 @@ require("user.php");
 
 <script>
 
-    $("#result_table .id_mod").addEventListener("click", function () {
 
-        var id_mod = $(this).text();
+    $(document).ready(function() {
+        $("#pop").empty();
+        $("#mod_table").empty();
 
-        $.ajax({
-            type: 'GET',
-            url: 'http://localhost/Visual_store_manager/io_script.php?id_mod='+id_mod,
 
-            success: function (data) {
-                if(data.msg)
-                {
-                    $("#result").append(data.msg);
-                }else {
-                    console.log(data);
-                    $("#result").append('<table id="result_table" border=1><tr><td>ID MODELLO</td><td>DATA</td></tr>');
-                    $.each(data, function (i, dato) {
-                        $("#result_table").append('<tr><td class="id_mod">' + dato.id_mod_io + '</td><td class="data_mod">' + dato.data_io + '</td></tr>');
+        $("#result").on("click", ".id_mod", function () {
 
-                    });
-                    $("#result").append('</table>');
+            var id_mod = $(this).text();
+            console.log(id_mod);
+
+            $.ajax({
+                type: 'GET',
+                url: 'http://localhost/Visual_store_manager/io_script.php?id_mod=' + id_mod,
+                dataType: "json",
+                success: function (data) {
+
+                    if (data.msg) {
+
+                        alert(data.msg);
+                    } else {
+
+                        $("#pop").css('visibility','visible');
+                        $("#pop").dialog({
+                            closeText: "X"
+                        });
+
+                        $("#pop").append('<table id="mod_table" border=1>');
+                        $.each(data, function (i, dato) {
+                            $("#mod_table").append('<tr><td>ID_MODELLO</td><td>' + dato.id_mod_io + '</td></tr>');
+                            $("#mod_table").append('<tr><td>DATA</td><td>' + dato.data_io + '</td></tr>');
+                            $("#mod_table").append('<tr><td>NR. SETT</td><td>' + dato.nr_sett + '</td></tr>');
+                            $("#mod_table").append('<tr><td>Tirocinio</td><td>' + dato.tiro + '</td></tr>');
+                            $("#mod_table").append('<tr><td>Effettive</td><td>' + dato.eff + '</td></tr>');
+                            $("#mod_table").append('<tr><td>Riduzione</td><td>' + dato.rid + '</td></tr>');
+                            $("#mod_table").append('<tr><td>Ferie</td><td>' + dato.ferie + '</td></tr>');
+                            $("#mod_table").append('<tr><td>Permessi</td><td>' + dato.pr + '</td></tr>');
+                            $("#mod_table").append('<tr><td>TOTALE</td><td>' + dato.tot + '</td></tr>');
+                            $("#mod_table").append('<tr><td>Malattia</td><td>' + dato.mal + '</td></tr>');
+                            $("#mod_table").append('<tr><td>Maternità</td><td>' + dato.mat + '</td></tr>');
+                            $("#mod_table").append('<tr><td>Varie</td><td>' + dato.varie + '</td></tr>');
+                            $("#mod_table").append('<tr><td>ORGANICO</td><td>' + dato.org + '</td></tr>');
+                            $("#mod_table").append('<tr><td>In entrata</td><td>' + dato.entr + '</td></tr>');
+                            $("#mod_table").append('<tr><td>In uscita</td><td>' + dato.usc + '</td></tr>');
+                            $("#mod_table").append('<tr><td>Straordinario</td><td>' + dato.str + '</td></tr>');
+                            $("#mod_table").append('<tr><td>Incasso</td><td>' + dato.incasso + '</td></tr>');
+                            $("#mod_table").append('<tr><td>Resa</td><td>' + dato.resa + '</td></tr>');
+
+                        });
+                        $("#pop").append('</table>');
+
+                    }
                 }
-
-
-            }
+            });
         });
+    });
 
 
-
-    })
 
 </script>

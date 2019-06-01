@@ -36,8 +36,9 @@ function getIo($g)
 
     } else if(isset($g['id_mod']))
     {
-        $stmt = $conn->prepare("select * from mod_io where id_mod_io like ?");
-
+        $id_mod = $g['id_mod'];
+        $stmt = $conn->prepare("select * from mod_io where id_mod_io = ?;");
+        $stmt->bind_param("i",$id_mod);
     }
     else {
         $msmError = (object)array('Dati non impostati');
@@ -48,8 +49,8 @@ function getIo($g)
     $stmt->execute();
     $result = $stmt->get_result();
 
-    $msmError = (object)array('Error');
-    $msmAlert = (object)array('No results');
+    $msmError = (object)array('msg'=>'Errore nella ricerca');
+    $msmAlert = (object)array('msg'=>'Nessun modulo che corrisponda ai parametri indicati.');
     if (!$result) echo json_encode($msmError);
     $return = array();
     while ($row = mysqli_fetch_assoc($result)) {
