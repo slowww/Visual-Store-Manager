@@ -44,8 +44,11 @@ input[type="number"]
     visibility: hidden;
 }
 
-
-
+.ui-button-icon-only
+{
+    margin-top: -15.5vh;
+    margin-left: 33.7vw;
+}
 body {
     background-color: lightcyan;
     font-family: sans-serif;
@@ -61,6 +64,14 @@ body {
     width: 30vw;
     height: 40vh;
     text-align: center;
+
+}
+#chartcheckbox {visibility: hidden}
+#chartcontainer{
+    /*visibility: hidden;*/
+    width: 30vw;
+    height: 50vh;
+    margin-top: 10vh;
 
 }
 
@@ -90,6 +101,10 @@ input[type="text"],input[type="password"],input[type=submit]{
 #result_table tr:hover{
     background-color: red;
     cursor: pointer;
+}
+
+#result_table{
+    width: 290px;
 }
 
 #container div {/*per index*/
@@ -122,6 +137,9 @@ table {
 }
 
 #pop{
+    position: absolute;
     border-radius: 6px;
+    z-index: -1;
+
 
 }

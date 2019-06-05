@@ -10,6 +10,7 @@ require("user.php");
     <link href="style.css" rel="stylesheet" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 </head>
 <body>
 <?php include 'backtomenu.html'; ?>
@@ -40,7 +41,7 @@ require("user.php");
 
 
 <table>
-<tr><td>CDC</td><td>MODELLO</td><td>MESE</td></tr>
+<tr><td>CDC</td><td>MODELLO</td><td>MESE</td><td>ANNO</td></tr>
 <tr>
   <td>
     <select required id="cdc">
@@ -87,6 +88,7 @@ require("user.php");
 </tr>
 <tr>
     <td><button onclick="ricercamod()">RICERCA</button></td>
+   <!-- <td id="chartcheckbox"><label>Mostra grafico</label><input type="checkbox" id="showChart"> </td>-->
 </tr>
 </table>
 
@@ -96,7 +98,7 @@ require("user.php");
 
 <div id="pop"></div>
 
-
+<div id="chartcontainer"><canvas id="myChart" width="80" height="50" display="none"></canvas></div>
 
 
 <?php mysqli_close($conn); ?>
@@ -105,6 +107,8 @@ require("user.php");
 
 </body>
 </html>
+
+
 
 <script>
     var min = new Date().getFullYear(),
@@ -122,16 +126,21 @@ require("user.php");
 <script>
     function ricercamod()
     {
-        switch ($("#mod").val()) {
+        $("#chartcheckbox").css('visibility','hidden');
+        $("#pop").empty();
+        /*switch ($("#mod").val()) {
+
+        CONTROLLO MODULO SELEZIONATO
             
-        }
+        }*/
 
         $("#result").empty();
 
         var cdc = $("#cdc").val();
         var mese = $("#mese").val();
         var anno = $("#anno").val();
-
+        const xlab=[];
+        const ylab=[];
         $.ajax({
             type: 'GET',
             url: 'http://localhost/Visual_store_manager/io_script.php?cdc='+cdc+'&mese='+mese+'&anno='+anno,
@@ -146,8 +155,13 @@ require("user.php");
                     $.each(data, function (i, dato) {
                         $("#result_table").append('<tr><td class="id_mod">' + dato.id_mod_io + '</td><td class="data_mod">' + dato.data_io + '</td></tr>');
 
+                        xlab.push(dato.nr_sett);
+                        ylab.push(dato.incasso);
+
                     });
                     $("#result").append('</table>');
+                    createGraph(xlab,ylab);
+                    $("#chartcheckbox").css('visibility','visible');
                 }
 
 
@@ -157,15 +171,90 @@ require("user.php");
 </script>
 
 <script>
+    /*$(document).ready(function(){
+            if($("#showChart").is(":checked"))
+
+                $('#chartcontainer').css("display","initial");
+            else
+                $('#chartcontainer').css("display","none");
 
 
+    });*/
+</script>
+
+
+
+<!--
+chiedo all'utente dato X (es. incasso)
+chiedo all'utente dato Y (es. straordinario)
+con una select (?)
+
+effettuo ajax (clone di ricercamod() ) per reperire tutti i dati (select * ...)
+dentro success:
+metto switch (?) per attribuire ad una prima variabile quali valori dovranno essere rappresentati dall asse x
+faccio un altro switch che fa la stessa cosa per l'asse y
+
+dentro each():
+data.datox -> pusho tutto in array per contenere valori x
+data.datoy -> idem per y
+
+chiamo funzione createGraph e gli passo (arrayx, arrayy)
+
+
+https://www.youtube.com/watch?v=5-ptp9tRApM
+-->
+
+
+
+
+<script>
+    function createGraph(xlabels,ylabels) {
+        var ctx = document.getElementById('myChart').getContext('2d');
+
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            responsive: true,
+            maintainAspectRatio: false,
+            data: {
+                labels: xlabels,
+                datasets: [{
+                    label: 'Variazione incasso su base settimanale',
+                    data: ylabels,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            }
+        });
+
+    }
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+//creazione POPUP
     $(document).ready(function() {
         $("#pop").empty();
         $("#mod_table").empty();
 
 
         $("#result").on("click", ".id_mod", function () {
-
+            $("#pop").empty();
             var id_mod = $(this).text();
             console.log(id_mod);
 
@@ -182,8 +271,16 @@ require("user.php");
 
                         $("#pop").css('visibility','visible');
                         $("#pop").dialog({
-                            closeText: "X"
+                            closeText: "X",
+                            close : function(event, ui) {
+                                $("#pop").html("");
+                            }
+                        }).position({
+                            my: "right+170",
+                            at: "top+5%",
+                            of: "#result_table"
                         });
+
 
                         $("#pop").append('<table id="mod_table" border=1>');
                         $.each(data, function (i, dato) {

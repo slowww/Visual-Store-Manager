@@ -67,7 +67,7 @@ session_start();
             )
 
         }
-    )
+    );
 
     $(function () {
             $("input[value=negozio]").click(
@@ -77,7 +77,7 @@ session_start();
             )
 
         }
-    )
+    );
 </script>
 
 
