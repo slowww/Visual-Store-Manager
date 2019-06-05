@@ -98,7 +98,7 @@ require("user.php");
 
 <div id="pop"></div>
 
-<div id="chartcontainer"><canvas id="myChart" width="80" height="50" display="none"></canvas></div>
+<div id="chartcontainer"><canvas id="myChart" width="80" height="50"></canvas></div>
 
 
 <?php mysqli_close($conn); ?>
@@ -269,7 +269,7 @@ https://www.youtube.com/watch?v=5-ptp9tRApM
                         alert(data.msg);
                     } else {
 
-                        $("#pop").css('visibility','visible');
+                        /*$("#pop").css('visibility','visible');
                         $("#pop").dialog({
                             closeText: "X",
                             close : function(event, ui) {
@@ -279,7 +279,7 @@ https://www.youtube.com/watch?v=5-ptp9tRApM
                             my: "right+170",
                             at: "top+5%",
                             of: "#result_table"
-                        });
+                        });*/
 
 
                         $("#pop").append('<table id="mod_table" border=1>');

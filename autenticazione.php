@@ -4,7 +4,7 @@ require 'connection.php';
 require("user.php");
 
 $user=$_POST['user'];
-$pwd=$_POST['pwd'];
+$pwd=md5($_POST['pwd']);
 $accesstype=$_POST['accesstype'];
 
 

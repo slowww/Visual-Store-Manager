@@ -203,7 +203,7 @@ function insertIo($p)
 
 
 
-    //$pwd_dip = md5($pwd_dip);
+    $pwd_dip = md5($pwd_dip);
 
     $stmt = $conn->prepare("SELECT cdc_fk FROM dipendenti WHERE id_dip like ? AND pwd_dip like ?;");
 

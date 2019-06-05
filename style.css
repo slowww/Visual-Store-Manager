@@ -26,11 +26,12 @@ input[type="number"]
 
 
 #pop{
+    /*position: relative;*/
     background-color: whitesmoke;
     border: 3px red solid;
-    display: inline-block;
-    visibility: hidden;
-    margin-left: 30vw;
+    /*display: inline-block;*/
+    margin-top: 5.5vh;
+    margin-left: 60vw;
 }
 
 
@@ -99,7 +100,7 @@ input[type="text"],input[type="password"],input[type=submit]{
 }
 
 #result_table tr:hover{
-    background-color: red;
+    background-color: lightgrey;
     cursor: pointer;
 }
 
