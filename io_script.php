@@ -24,7 +24,12 @@ function getIo($g)
      *
      * select id_mod_io, data_io from mod_io where cdc_fk like ? and YEAR(DATE(data_io))=? AND MONTH(DATE(data_io)) = ?
      * */
-    $conn= new mysqli("localhost","root","","vsm_db");
+    //$conn= new mysqli("localhost","root","","vsm_db");
+    $conn= new mysqli("remotemysql.com:3306","6mDvq7h8FM","02RsSlTvzW","6mDvq7h8FM");
+
+    if ($conn->connect_error) {
+        die("Connessione col db non riuscita: " . $conn->connect_error);
+    }
     if (isset($g['cdc']) && isset($g['mese']) && isset($g['anno'])) {
 
         $cdc = $g['cdc'];
@@ -84,7 +89,12 @@ function getIo($g)
 
 function insertIo($p)
 {
-    $conn= new mysqli("localhost","root","","vsm_db");
+    //$conn= new mysqli("localhost","root","","vsm_db");
+    $conn= new mysqli("remotemysql.com:3306","6mDvq7h8FM","02RsSlTvzW","6mDvq7h8FM");
+
+    if ($conn->connect_error) {
+        die("Connessione col db non riuscita: " . $conn->connect_error);
+    }
     $nrsett=date('W');
     $tiro=0;
     $eff=0;
