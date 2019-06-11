@@ -111,11 +111,11 @@ require("user.php");
 
 
 <script>
-    var min = new Date().getFullYear(),
-    max = min - 2,
+    var max = new Date().getFullYear(),
+   min = max - 2,
     select = document.getElementById('anno');
 
-    for (var i = max; i<=min; i++){
+    for (var i = max; i>=min; i--){
         var opt = document.createElement('option');
         opt.value = i;
         opt.innerHTML = i;
