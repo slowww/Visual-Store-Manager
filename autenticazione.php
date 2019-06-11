@@ -63,7 +63,7 @@ if(isset($user)&&isset($pwd)&&isset($accesstype))
 }else
 {
 
-    header('Location: index2.php?errmsg=error');
+    header('Location: index.php?errmsg=error');
     die();
 
 }
