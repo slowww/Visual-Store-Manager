@@ -126,7 +126,7 @@ require("user.php");
 <script>
     function ricercamod()
     {
-        $("#chartcheckbox").css('visibility','hidden');
+        //$("#chartcheckbox").css('visibility','hidden');
         $("#pop").empty();
         /*switch ($("#mod").val()) {
 
@@ -161,7 +161,7 @@ require("user.php");
                     });
                     $("#result").append('</table>');
                     createGraph(xlab,ylab);
-                    $("#chartcheckbox").css('visibility','visible');
+                    //$("#chartcheckbox").css('visibility','visible');
                 }
 
 

@@ -1,3 +1,5 @@
+<head><link href="style.css" type="text/css" rel="stylesheet"></head>
+
 <?php
 
 require 'connection.php';
