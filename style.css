@@ -23,6 +23,8 @@ input[type="number"]
 
 }
 
+#logo {margin-left: 44%;}
+
 
 
 #pop{
@@ -74,6 +76,12 @@ body {
     height: 50vh;
     margin-top: 10vh;
 
+}
+
+textarea {
+    -webkit-border-radius: 2%;
+    -moz-border-radius: 2%;
+    border-radius: 2%;
 }
 
 input[type="text"],input[type="password"],input[type=submit]{

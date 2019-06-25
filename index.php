@@ -24,7 +24,8 @@ session_start();
 
 <body>
 
-<h2 align="center">VISUAL <br> STORE <br> MANAGER</h2>
+<!--<h2 align="center">VISUAL <br> STORE <br> MANAGER</h2>-->
+<div id="logo"><img src="logo.png"></div>
 
 <form method="POST" action="autenticazione.php">
 <div id="container">

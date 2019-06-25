@@ -143,6 +143,7 @@ require("user.php");
         const ylab=[];
         $.ajax({
             type: 'GET',
+            crossDomain: true,
             url: 'http://localhost/Visual_store_manager/io_script.php?cdc='+cdc+'&mese='+mese+'&anno='+anno,
 
             success: function (data) {
@@ -209,6 +210,7 @@ https://www.youtube.com/watch?v=5-ptp9tRApM
 
 <script>
     function createGraph(xlabels,ylabels) {
+
         var ctx = document.getElementById('myChart').getContext('2d');
 
         var myChart = new Chart(ctx, {

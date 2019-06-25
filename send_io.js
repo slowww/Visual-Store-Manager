@@ -4,7 +4,6 @@ function ajxSend(){
     var str = $("#xtr").val();
     var id_dip = $("[name='id_dip']").val();
     var pwd_dip = $("[name='pwd_dip']").val();
-    var nrsett = $("[name='nrsett']").val();
     var tiro = $("[name='tiro']").val();
     var eff = $("[name='eff']").val();
     var rid = $("[name='rid']").val();
@@ -22,8 +21,9 @@ function ajxSend(){
 
     $.ajax({
         type: "POST",
+        crossDomain: true,
         url: "http://localhost/visual_store_manager/io_script.php",
-        data: "nrsett="+nrsett+"&tiro="+tiro+"&eff="+eff+"&rid="+rid+"&fe="+fe+"&pr="+pr+"&mal="+mal+"&mat="+mat+"&varie="+varie+"&org="+org+"&ent"+ent+"&usc="+usc+"&inc="+inc+"&resa="+resa+"&tot="+tot+"&str="+str+"&id_dip="+id_dip+"&pwd_dip="+pwd_dip,
+        data: "tiro="+tiro+"&eff="+eff+"&rid="+rid+"&fe="+fe+"&pr="+pr+"&mal="+mal+"&mat="+mat+"&varie="+varie+"&org="+org+"&ent"+ent+"&usc="+usc+"&inc="+inc+"&resa="+resa+"&tot="+tot+"&str="+str+"&id_dip="+id_dip+"&pwd_dip="+pwd_dip,
         dataType: "json",
         success: function(data)
         {
