@@ -223,10 +223,10 @@ https://www.youtube.com/watch?v=5-ptp9tRApM
                     label: 'Variazione incasso su base settimanale',
                     data: ylabels,
                     backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)'
+                        'rgba(142, 200, 213, 0.4)'
                     ],
                     borderColor: [
-                        'rgba(255, 99, 132, 1)'
+                        'rgba(255, 0, 0, 0.8)'
                     ],
                     borderWidth: 1
                 }]

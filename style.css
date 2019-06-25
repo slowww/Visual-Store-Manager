@@ -30,7 +30,7 @@ input[type="number"]
 #pop{
     /*position: relative;*/
     background-color: whitesmoke;
-    border: 3px red solid;
+    border: 3px lightsteelblue solid;
     /*display: inline-block;*/
     margin-top: 5.5vh;
     margin-left: 60vw;
@@ -53,7 +53,7 @@ input[type="number"]
     margin-left: 33.7vw;
 }
 body {
-    background-color: lightcyan;
+    background-color: gainsboro;
     font-family: sans-serif;
 }
 #container {/*per index*/
@@ -153,13 +153,15 @@ table {
 
 #headerlink {
     transition-property: color;
-    transition-duration: 1s;
+
+    transition-duration: 0.5s;
 
 }
 #headerlink:visited { color: black;
 }
 
 #headerlink:hover {
+
     color: yellow;
 }
 
@@ -170,5 +172,16 @@ table {
     height: 3vh;
     text-align: center;
     padding: 1%;
-    transition: background-color 2s;
+
+}
+
+#header:hover{
+    background-color: thistle;
+}
+
+#header {
+    transition-property: background-color;
+
+    transition-duration: 0.5s;
+
 }
