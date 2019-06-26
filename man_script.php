@@ -123,7 +123,14 @@ function insertMan($p)
                 $oss= $v;
                 break;
             case "comment":
-                $comment = $v;
+                if($v)
+                {
+                    $comment = $v;
+                }else
+                {
+                    $comment=null;
+                }
+
                 break;
             case "id_dip":
                 $id_dip = $v;
@@ -145,7 +152,6 @@ function insertMan($p)
     $stmt->execute();
     $result = $stmt->get_result();
     if ($result->num_rows==1) {
-
 
         //se autenticazione ok
         while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
@@ -182,21 +188,21 @@ function insertMan($p)
                 //$id_mod_io_fk = mysql_insert_id($stmt);
                 //echo $id_mod_io_fk;
                 //var_dump($stmt->affected_rows);
-                $msg = (object)array('response_code' => '200');
+                $msg = (object)array('response_code' => '200');//inserimento ok
                 echo json_encode($msg);
             } else {
                 //var_dump($stmt->affected_rows);
-                $msg = (object)array('response_code' => '401');
+                $msg = (object)array('response_code' => $conn->error . " " . $p_iva_fk);//inserimento no
                 echo json_encode($msg);
             }
         }
-            } else {   //se autenticazione va male
+        else {   //se autenticazione va male
                 $msg = (object)array('response_code' => '400');
                 echo json_encode($msg);
             }
 
             $stmt->close();
             $conn->close();
-        }
+
 
     }

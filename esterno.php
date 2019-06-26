@@ -39,7 +39,7 @@ require("user.php");
     ?>
 </h2>
 
-
+<div id="esternocont">
 <table>
 <tr><td>CDC</td><td>MODELLO</td><td>MESE</td><td>ANNO</td></tr>
 <tr>
@@ -91,7 +91,7 @@ require("user.php");
    <!-- <td id="chartcheckbox"><label>Mostra grafico</label><input type="checkbox" id="showChart"> </td>-->
 </tr>
 </table>
-
+</div>
 
 
 <div id="result"></div>
@@ -223,10 +223,10 @@ https://www.youtube.com/watch?v=5-ptp9tRApM
                     label: 'Variazione incasso su base settimanale',
                     data: ylabels,
                     backgroundColor: [
-                        'rgba(142, 200, 213, 0.4)'
+                        'rgba(176, 196, 222, 1)'
                     ],
                     borderColor: [
-                        'rgba(255, 0, 0, 0.8)'
+                        'rgba(255, 0, 0, 1)'
                     ],
                     borderWidth: 1
                 }]

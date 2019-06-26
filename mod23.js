@@ -29,7 +29,7 @@ function ajx_man(){
                     alert("Credenziali inserite errate: utente non presente nel database.");
                     break;
                 default:
-                    alert('boooooo');
+                    alert(data.response_code);
                     break;
             }
 

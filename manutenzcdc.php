@@ -25,7 +25,7 @@ require("user.php");?>
                             options += '<option value='+dato.nome_ditta+'>' + dato.nome_ditta + '</option>';
 
                         });
-                        $("#ditta").html(options);
+                        $("[name='ditta']").html(options);
                     }//else
                 }//success function
             });//ajax
@@ -42,12 +42,12 @@ require("user.php");?>
 <div id="modelcontainer">
     <table>
         <tr><td>Data: <?php echo date("d/m/Y")?></tr>
-        <tr><td>Ditta che esegue l'intervento: </td><td>
-                <select required id="ditta">
+        <tr><td>Ditta che esegue l'intervento</td><td>
+                <select required name="ditta">
 
                 </select>
             </td></tr>
-        <tr><td>Manutenzione: </td>
+        <tr><td>Manutenzione</td>
             <td>
                 <select name="tipoman">
                     <option value="ord">Ordinaria</option>
@@ -62,9 +62,19 @@ require("user.php");?>
             <input type="number" name="noperai" maxlength="2" placeholder="numero operai"></td>
         </tr>
         <tr><td>Materiali impiegati</td><td><textarea name="mat"></textarea></td></tr>
-        <tr><td>Osservazioni gestore:</td><td>Intervento soddisfacente <input type="checkbox" name="oss"><br>
-                                            Altro <input id="altro" type="checkbox" onchange="valueChanged()" checked><br>
-                                            <textarea id="comment" rows='4' cols='50' name='comment' placeholder='Commento?'></textarea></td></tr>
+        <tr><td>Intervento </td>
+            <td><select name="oss">
+                <option value="sodd">Soddisfacente</option>
+                <option value="insodd">Insoddisfacente</option>
+                </select></td>
+        </tr>
+        <tr><td>Osservazioni gestore</td>
+            <td>Altro <input id="altro" type="checkbox" onchange="valueChanged()" checked></td>
+        </tr>
+        <tr>
+            <td></td></td><td><textarea id="comment" rows='4' cols='50' name='comment' placeholder='Commento?'></textarea></td>
+        </tr>
+
     </table>
     <div id="aut">
         <input type="text" name="id_dip" placeholder="ID dipendente" required><br><br>

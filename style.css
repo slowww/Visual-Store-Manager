@@ -11,14 +11,14 @@ input[type="number"]
 
 
 #result {
-    display:inline-block;
+
     position: absolute;
     background-color: whitesmoke;
     overflow-y: auto;
     overflow-x: hidden;
 
-    margin-top: 15vh;
-    margin-right: 70vw;
+    margin-top: 5vh;
+    margin-left: 40vw;
     height: 60vh;
 
 }
@@ -67,6 +67,7 @@ body {
     width: 30vw;
     height: 40vh;
     text-align: center;
+    border: solid 2px lightsteelblue;
 
 }
 #chartcheckbox {visibility: hidden}
@@ -96,6 +97,7 @@ input[type="text"],input[type="password"],input[type=submit]{
     bottom: 20vh;
     background-color: lightgray;
     border-radius: 2%;
+    border: 2px solid lightsteelblue;
     width: -moz-fit-content;
     width: fit-content;
     height: fit-content;
@@ -105,11 +107,13 @@ input[type="text"],input[type="password"],input[type=submit]{
 
 #header{
     overflow-x: auto;
+    border: 2px solid lightsteelblue;
 }
 
 #result_table tr:hover{
-    background-color: lightgrey;
+    background-color: lightsteelblue;
     cursor: pointer;
+
 }
 
 #result_table{
@@ -160,9 +164,14 @@ table {
 #headerlink:visited { color: black;
 }
 
-#headerlink:hover {
-
-    color: yellow;
+#esternocont {
+    border-radius: 6px;
+    height: fit-content;
+    width: -moz-fit-content;
+    border: 2px solid lightsteelblue;
+    background-color: lightgrey;
+    margin-left: 2vw;
+    padding: 1%;
 }
 
 #header {
@@ -176,7 +185,7 @@ table {
 }
 
 #header:hover{
-    background-color: thistle;
+    background-color: lightsteelblue;
 }
 
 #header {

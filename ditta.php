@@ -26,7 +26,7 @@ function getDitta($g)
         die("Connessione col db non riuscita: " . $conn->connect_error);
     }
 
-    $stmt = $conn->prepare("select nome_ditta from ditta_esterna;");
+    $stmt = $conn->prepare("select nome_ditta from ditta_esterna order by nome_ditta;");
 
     /*parte di codice che si ripete*/
     $stmt->execute();
