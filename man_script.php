@@ -19,8 +19,8 @@ switch($_SERVER['REQUEST_METHOD'])
 
 function getMan($g)
 {
-    $conn= new mysqli("localhost","root","","vsm_db");
-    //$conn= new mysqli("remotemysql.com:3306","6mDvq7h8FM","02RsSlTvzW","6mDvq7h8FM");
+    //$conn= new mysqli("localhost","root","","vsm_db");
+    $conn= new mysqli("remotemysql.com:3306","6mDvq7h8FM","02RsSlTvzW","6mDvq7h8FM");
 
     if ($conn->connect_error) {
         die("Connessione col db non riuscita: " . $conn->connect_error);
@@ -31,13 +31,13 @@ function getMan($g)
         $mese = (int)$g['mese'];
         $anno = (int)$g['anno'];
 
-        $stmt = $conn->prepare("select * from mod_io where cdc_fk like ? and YEAR(DATE(data_io))=? AND MONTH(DATE(data_io)) = ?;");
+        $stmt = $conn->prepare("select * from mod_man where cdc_fk like ? and YEAR(DATE(data_man))=? AND MONTH(DATE(data_man)) = ?;");
         $stmt->bind_param("sii", $cdc, $anno, $mese);
 
-    } else if(isset($g['id_mod']))
+    } else if(isset($g['id_mod']))//per dettaglio modello
     {
         $id_mod = $g['id_mod'];
-        $stmt = $conn->prepare("select * from mod_io where id_mod_io = ?;");
+        $stmt = $conn->prepare("select * from mod_man where id_mod_man = ?");
         $stmt->bind_param("i",$id_mod);
     }
     else {
@@ -84,8 +84,8 @@ function getMan($g)
 
 function insertMan($p)
 {
-    $conn= new mysqli("localhost","root","","vsm_db");
-    //$conn= new mysqli("remotemysql.com:3306","6mDvq7h8FM","02RsSlTvzW","6mDvq7h8FM");
+    //$conn= new mysqli("localhost","root","","vsm_db");
+    $conn= new mysqli("remotemysql.com:3306","6mDvq7h8FM","02RsSlTvzW","6mDvq7h8FM");
 
     if ($conn->connect_error) {
         die("Connessione col db non riuscita: " . $conn->connect_error);

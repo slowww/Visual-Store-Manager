@@ -2,6 +2,9 @@
 session_start();
 $rifconn = include_once('connection.php');
 header('Content-Type: application/json');
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: X-Requested-With, Content-Type, Accept, Origin, Authorization");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, PATCH, OPTIONS");
 
 /*$access=unserialize($_SESSION['access']);
 $cdc=$access->getUsername();*/
@@ -19,8 +22,8 @@ switch($_SERVER['REQUEST_METHOD'])
 
 function getIo($g)
 {
-    $conn= new mysqli("localhost","root","","vsm_db");
-    //$conn= new mysqli("remotemysql.com:3306","6mDvq7h8FM","02RsSlTvzW","6mDvq7h8FM");
+    //$conn= new mysqli("localhost","root","","vsm_db");
+    $conn= new mysqli("remotemysql.com:3306","6mDvq7h8FM","02RsSlTvzW","6mDvq7h8FM");
 
     if ($conn->connect_error) {
         die("Connessione col db non riuscita: " . $conn->connect_error);
@@ -84,8 +87,8 @@ function getIo($g)
 
 function insertIo($p)
 {
-    $conn= new mysqli("localhost","root","","vsm_db");
-    //$conn= new mysqli("remotemysql.com:3306","6mDvq7h8FM","02RsSlTvzW","6mDvq7h8FM");
+    //$conn= new mysqli("localhost","root","","vsm_db");
+    $conn= new mysqli("remotemysql.com:3306","6mDvq7h8FM","02RsSlTvzW","6mDvq7h8FM");
 
     if ($conn->connect_error) {
         die("Connessione col db non riuscita: " . $conn->connect_error);

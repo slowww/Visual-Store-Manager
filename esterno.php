@@ -11,6 +11,8 @@ require("user.php");
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script type="text/javascript" src="createGraph.js"></script>
+    <script type="text/javascript" src="research.js"></script>
 </head>
 <body>
 <?php include 'backtomenu.html'; ?>
@@ -61,7 +63,7 @@ require("user.php");
   <td>
     <select id="mod">
       <option value="io">INCASSI&ORE</option>
-      <option value="manutenz">MOD.23 (manutenzioni)</option>
+      <option value="man">MOD.23 (manutenzioni)</option>
       <option value="diff">MOD.140 (differenze di carico)</option>
     </select>
   </td>
@@ -86,7 +88,11 @@ require("user.php");
         </select>
     </td>
 </tr>
+<tr></tr>
 <tr>
+    <td></td>
+    <td></td>
+    <td></td>
     <td><button onclick="ricercamod()">RICERCA</button></td>
    <!-- <td id="chartcheckbox"><label>Mostra grafico</label><input type="checkbox" id="showChart"> </td>-->
 </tr>
@@ -123,53 +129,6 @@ require("user.php");
     }
 </script>
 
-<script>
-    function ricercamod()
-    {
-        //$("#chartcheckbox").css('visibility','hidden');
-        $("#pop").empty();
-        /*switch ($("#mod").val()) {
-
-        CONTROLLO MODULO SELEZIONATO
-            
-        }*/
-
-        $("#result").empty();
-
-        var cdc = $("#cdc").val();
-        var mese = $("#mese").val();
-        var anno = $("#anno").val();
-        const xlab=[];
-        const ylab=[];
-        $.ajax({
-            type: 'GET',
-            crossDomain: true,
-            url: 'http://localhost/Visual_store_manager/io_script.php?cdc='+cdc+'&mese='+mese+'&anno='+anno,
-
-            success: function (data) {
-                if(data.msg)
-                {
-                    alert(data.msg);
-                }else {
-                    console.log(data);
-                    $("#result").append('<table id="result_table"><thead><tr><th>ID MODELLO</th><th>DATA</th></tr></thead>');
-                    $.each(data, function (i, dato) {
-                        $("#result_table").append('<tr><td class="id_mod">' + dato.id_mod_io + '</td><td class="data_mod">' + dato.data_io + '</td></tr>');
-
-                        xlab.push(dato.nr_sett);
-                        ylab.push(dato.incasso);
-
-                    });
-                    $("#result").append('</table>');
-                    createGraph(xlab,ylab);
-                    //$("#chartcheckbox").css('visibility','visible');
-                }
-
-
-            }
-        });
-    }
-</script>
 
 <script>
     /*$(document).ready(function(){
@@ -209,31 +168,7 @@ https://www.youtube.com/watch?v=5-ptp9tRApM
 
 
 <script>
-    function createGraph(xlabels,ylabels) {
 
-        var ctx = document.getElementById('myChart').getContext('2d');
-
-        var myChart = new Chart(ctx, {
-            type: 'line',
-            responsive: true,
-            maintainAspectRatio: false,
-            data: {
-                labels: xlabels,
-                datasets: [{
-                    label: 'Variazione incasso su base settimanale',
-                    data: ylabels,
-                    backgroundColor: [
-                        'rgba(176, 196, 222, 1)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 0, 0, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            }
-        });
-
-    }
 
 </script>
 
@@ -260,57 +195,99 @@ https://www.youtube.com/watch?v=5-ptp9tRApM
             var id_mod = $(this).text();
             console.log(id_mod);
 
-            $.ajax({
-                type: 'GET',
-                url: 'http://localhost/Visual_store_manager/io_script.php?id_mod=' + id_mod,
-                dataType: "json",
-                success: function (data) {
+            switch($("#mod").val())
+            {
+                case "io":
+                    $.ajax({
+                        type: 'GET',
+                        url: 'http://localhost/Visual_store_manager/io_script.php?id_mod=' + id_mod,
+                        dataType: "json",
+                        success: function (data) {
 
-                    if (data.msg) {
+                            if (data.msg) {
 
-                        alert(data.msg);
-                    } else {
+                                alert(data.msg);
+                            } else {
 
-                        /*$("#pop").css('visibility','visible');
-                        $("#pop").dialog({
-                            closeText: "X",
-                            close : function(event, ui) {
-                                $("#pop").html("");
+                                /*$("#pop").css('visibility','visible');
+                                $("#pop").dialog({
+                                    closeText: "X",
+                                    close : function(event, ui) {
+                                        $("#pop").html("");
+                                    }
+                                }).position({
+                                    my: "right+170",
+                                    at: "top+5%",
+                                    of: "#result_table"
+                                });*/
+
+
+                                $("#pop").append('<table id="mod_table" border=1>');
+                                $.each(data, function (i, dato) {
+                                    $("#mod_table").append('<tr><td>ID_MODELLO</td><td>' + dato.id_mod_io + '</td></tr>');
+                                    $("#mod_table").append('<tr><td>DATA</td><td>' + dato.data_io + '</td></tr>');
+                                    $("#mod_table").append('<tr><td>NR. SETT</td><td>' + dato.nr_sett + '</td></tr>');
+                                    $("#mod_table").append('<tr><td>Tirocinio</td><td>' + dato.tiro + '</td></tr>');
+                                    $("#mod_table").append('<tr><td>Effettive</td><td>' + dato.eff + '</td></tr>');
+                                    $("#mod_table").append('<tr><td>Riduzione</td><td>' + dato.rid + '</td></tr>');
+                                    $("#mod_table").append('<tr><td>Ferie</td><td>' + dato.ferie + '</td></tr>');
+                                    $("#mod_table").append('<tr><td>Permessi</td><td>' + dato.pr + '</td></tr>');
+                                    $("#mod_table").append('<tr><td>TOTALE</td><td>' + dato.tot + '</td></tr>');
+                                    $("#mod_table").append('<tr><td>Malattia</td><td>' + dato.mal + '</td></tr>');
+                                    $("#mod_table").append('<tr><td>Maternità</td><td>' + dato.mat + '</td></tr>');
+                                    $("#mod_table").append('<tr><td>Varie</td><td>' + dato.varie + '</td></tr>');
+                                    $("#mod_table").append('<tr><td>ORGANICO</td><td>' + dato.org + '</td></tr>');
+                                    $("#mod_table").append('<tr><td>In entrata</td><td>' + dato.entr + '</td></tr>');
+                                    $("#mod_table").append('<tr><td>In uscita</td><td>' + dato.usc + '</td></tr>');
+                                    $("#mod_table").append('<tr><td>Straordinario</td><td>' + dato.str + '</td></tr>');
+                                    $("#mod_table").append('<tr><td>Incasso</td><td>' + dato.incasso + '</td></tr>');
+                                    $("#mod_table").append('<tr><td>Resa</td><td>' + dato.resa + '</td></tr>');
+
+                                });
+                                $("#pop").append('</table>');
+
                             }
-                        }).position({
-                            my: "right+170",
-                            at: "top+5%",
-                            of: "#result_table"
-                        });*/
+                        }
+                    });
+                    break;
+
+                case "man":
+                    $.ajax({
+                        type: 'GET',
+                        url: 'http://localhost/Visual_store_manager/man_script.php?id_mod=' + id_mod,
+                        dataType: "json",
+                        success: function (data) {
+
+                            if (data.msg) {
+
+                                alert(data.msg);
+                            } else {
+
+                                $("#pop").append('<table id="mod_table" border=1>');
+                                $.each(data, function (i, dato) {
+                                    $("#mod_table").append('<tr><td>ID_MODELLO</td><td>' + dato.id_mod_man + '</td></tr>');
+                                    $("#mod_table").append('<tr><td>DATA</td><td>' + dato.data_man + '</td></tr>');
+                                    $("#mod_table").append('<tr><td>Autorizzazione</td><td>' + dato.matr_fk + '</td></tr>');
+                                    $("#mod_table").append('<tr><td>Tipo manutenzione</td><td>' + dato.tipoman + '</td></tr>');
+                                    $("#mod_table").append('<tr><td>Operazioni</td><td>' + dato.operazioni + '</td></tr>');
+                                    $("#mod_table").append('<tr><td>Attrezzature</td><td>' + dato.attrezz + '</td></tr>');
+                                    $("#mod_table").append('<tr><td>Durata in ore</td><td>' + dato.durata + '</td></tr>');
+                                    $("#mod_table").append('<tr><td>Numero operai</td><td>' + dato.noper + '</td></tr>');
+                                    $("#mod_table").append('<tr><td>Materiali impiegati</td><td>' + dato.mat + '</td></tr>');
+                                    $("#mod_table").append('<tr><td>Valutazione intervento</td><td>' + dato.oss + '</td></tr>');
+                                    $("#mod_table").append('<tr><td>Commento</td><td>' + dato.comment + '</td></tr>');
 
 
-                        $("#pop").append('<table id="mod_table" border=1>');
-                        $.each(data, function (i, dato) {
-                            $("#mod_table").append('<tr><td>ID_MODELLO</td><td>' + dato.id_mod_io + '</td></tr>');
-                            $("#mod_table").append('<tr><td>DATA</td><td>' + dato.data_io + '</td></tr>');
-                            $("#mod_table").append('<tr><td>NR. SETT</td><td>' + dato.nr_sett + '</td></tr>');
-                            $("#mod_table").append('<tr><td>Tirocinio</td><td>' + dato.tiro + '</td></tr>');
-                            $("#mod_table").append('<tr><td>Effettive</td><td>' + dato.eff + '</td></tr>');
-                            $("#mod_table").append('<tr><td>Riduzione</td><td>' + dato.rid + '</td></tr>');
-                            $("#mod_table").append('<tr><td>Ferie</td><td>' + dato.ferie + '</td></tr>');
-                            $("#mod_table").append('<tr><td>Permessi</td><td>' + dato.pr + '</td></tr>');
-                            $("#mod_table").append('<tr><td>TOTALE</td><td>' + dato.tot + '</td></tr>');
-                            $("#mod_table").append('<tr><td>Malattia</td><td>' + dato.mal + '</td></tr>');
-                            $("#mod_table").append('<tr><td>Maternità</td><td>' + dato.mat + '</td></tr>');
-                            $("#mod_table").append('<tr><td>Varie</td><td>' + dato.varie + '</td></tr>');
-                            $("#mod_table").append('<tr><td>ORGANICO</td><td>' + dato.org + '</td></tr>');
-                            $("#mod_table").append('<tr><td>In entrata</td><td>' + dato.entr + '</td></tr>');
-                            $("#mod_table").append('<tr><td>In uscita</td><td>' + dato.usc + '</td></tr>');
-                            $("#mod_table").append('<tr><td>Straordinario</td><td>' + dato.str + '</td></tr>');
-                            $("#mod_table").append('<tr><td>Incasso</td><td>' + dato.incasso + '</td></tr>');
-                            $("#mod_table").append('<tr><td>Resa</td><td>' + dato.resa + '</td></tr>');
+                                });
+                                $("#pop").append('</table>');
 
-                        });
-                        $("#pop").append('</table>');
+                            }
+                        }
+                    });
+                    break;
+            }
 
-                    }
-                }
-            });
+
         });
     });
 
