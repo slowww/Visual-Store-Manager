@@ -22,8 +22,8 @@ switch($_SERVER['REQUEST_METHOD'])
 
 function getMan($g)
 {
-    //$conn= new mysqli("localhost","root","","vsm_db");
-    $conn= new mysqli("remotemysql.com:3306","xJdxb0ls5W","OSuER1hWdL","xJdxb0ls5W");
+    $conn= new mysqli("localhost","root","","vsm_db");
+    //$conn= new mysqli("remotemysql.com:3306","xJdxb0ls5W","OSuER1hWdL","xJdxb0ls5W");
 
     if ($conn->connect_error) {
         die("Connessione col db non riuscita: " . $conn->connect_error);
@@ -87,8 +87,8 @@ function getMan($g)
 
 function insertMan($p)
 {
-    //$conn= new mysqli("localhost","root","","vsm_db");
-    $conn= new mysqli("remotemysql.com:3306","xJdxb0ls5W","OSuER1hWdL","xJdxb0ls5W");
+    $conn= new mysqli("localhost","root","","vsm_db");
+    //$conn= new mysqli("remotemysql.com:3306","xJdxb0ls5W","OSuER1hWdL","xJdxb0ls5W");
 
     if ($conn->connect_error) {
         die("Connessione col db non riuscita: " . $conn->connect_error);
