@@ -22,8 +22,8 @@ switch($_SERVER['REQUEST_METHOD'])
 
 function getDitta($g)
 {
-    $conn= new mysqli("localhost","root","","vsm_db");
-    //$conn= new mysqli("remotemysql.com:3306","6mDvq7h8FM","02RsSlTvzW","6mDvq7h8FM");
+    //$conn= new mysqli("localhost","root","","vsm_db");
+    $conn= new mysqli("remotemysql.com:3306","xJdxb0ls5W","02RsSlTvzW","xJdxb0ls5W");
 
     if ($conn->connect_error) {
         die("Connessione col db non riuscita: " . $conn->connect_error);

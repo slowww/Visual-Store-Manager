@@ -1,5 +1,7 @@
 <?php session_start();
-require("user.php");?>
+require("user.php");
+header("Access-Control-Allow-Origin: *");
+?>
 
 <html>
 

@@ -1,5 +1,6 @@
 <?php
 session_start();
+header("Access-Control-Allow-Origin: *");
     if(isset($_GET['errmsg'])&&$_GET['errmsg']=="error")
     {
         echo "<script>alert('Dati inseriti non corretti. Riprovare!');</script>";
