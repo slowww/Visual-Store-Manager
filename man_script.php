@@ -40,7 +40,7 @@ function getMan($g)
     } else if(isset($g['id_mod']))//per dettaglio modello
     {
         $id_mod = $g['id_mod'];
-        $stmt = $conn->prepare("select * from mod_man where id_mod_man = ?");
+        $stmt = $conn->prepare("select * from dipendenti inner join mod_man on matr = matr_fk inner join ditta_esterna on p_iva_fk = p_iva where id_mod_man = ?");
         $stmt->bind_param("i",$id_mod);
     }
     else {

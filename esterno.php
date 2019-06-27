@@ -268,7 +268,8 @@ https://www.youtube.com/watch?v=5-ptp9tRApM
                                 $.each(data, function (i, dato) {
                                     $("#mod_table").append('<tr><td>ID_MODELLO</td><td>' + dato.id_mod_man + '</td></tr>');
                                     $("#mod_table").append('<tr><td>DATA</td><td>' + dato.data_man + '</td></tr>');
-                                    $("#mod_table").append('<tr><td>Autorizzazione</td><td>' + dato.matr_fk + '</td></tr>');
+                                    $("#mod_table").append('<tr><td>Autorizzata da </td><td>' + dato.cogn_dip + '</td></tr>');
+                                    $("#mod_table").append('<tr><td>Ditta</td><td>' + dato.nome_ditta + '</td></tr>');
                                     $("#mod_table").append('<tr><td>Tipo manutenzione</td><td>' + dato.tipoman + '</td></tr>');
                                     $("#mod_table").append('<tr><td>Operazioni</td><td>' + dato.operazioni + '</td></tr>');
                                     $("#mod_table").append('<tr><td>Attrezzature</td><td>' + dato.attrezz + '</td></tr>');
