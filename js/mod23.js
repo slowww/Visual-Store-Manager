@@ -5,14 +5,14 @@ function ajx_man(){
 
 
 
-    var x = $("form").serialize();
+    var man = $("form").serialize();
     console.log(x);
 
 
     $.ajax({
         type: "POST",
         url: "./man_script.php",
-        data: x,
+        data: man,
         dataType: "json",
         success: function(data)
         {

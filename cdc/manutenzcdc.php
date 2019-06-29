@@ -1,14 +1,14 @@
 <?php session_start();
-require("user.php");
+require("../classes/user.php");
 header("Access-Control-Allow-Origin: *");
 ?>
 
 <html>
 
 <head>
-<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="../style/style.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" src="mod23.js"></script>
+    <script type="text/javascript" src="../js/mod23.js"></script>
 
     <script type="text/javascript" charset="utf-8">
         $(document).ready(function() {
@@ -16,7 +16,7 @@ header("Access-Control-Allow-Origin: *");
             var options = '';
             $.ajax({
                 type: 'GET',
-                url: 'http://localhost/visual_store_manager/ditta.php',
+                url: '../api/ditta.php',
                 success: function (data) {
                     if (data.msg) {
                         alert(data.msg);
@@ -38,8 +38,8 @@ header("Access-Control-Allow-Origin: *");
 </head>
 
 <body>
-<?php include 'backtomenu.html'; ?>
-<?php include 'header.php'?>
+<?php include '../style/backtomenu.html'; ?>
+<?php include '../style/header.php'; ?>
 <form action="">
 <div id="modelcontainer">
     <table>

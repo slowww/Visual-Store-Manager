@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once('connection.php');
+include_once('../config/connection.php');
 header('Content-Type: application/json');
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: X-Requested-With, Content-Type, Accept, Origin, Authorization");

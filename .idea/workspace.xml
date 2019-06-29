@@ -2,39 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e588dde6-8d63-4538-947c-bb9afa6e9c07" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/launch.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/autenticazione.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backtomenu.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdc.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/connection.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/createGraph.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/diffcdc.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dip.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ditta.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/esterno.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/header.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/incassiorecdc.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/autenticazione.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/autenticazione.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/ditta.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/ditta.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/io_script.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/io_script.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/man_script.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/man_script.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdc/incassiorecdc.php" beforeDir="false" afterPath="$PROJECT_DIR$/cdc/incassiorecdc.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdc/manutenzcdc.php" beforeDir="false" afterPath="$PROJECT_DIR$/cdc/manutenzcdc.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/io_script.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/man_script.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manutenzcdc.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod23.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/research.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rifiuticdc.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/send_io.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/stampe.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/stampe/incassi_ore_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/stampe/incassi_ore_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/stampe/index.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/stampe/manutenzioni.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/stampe/pagina_accesso_dip_esterno(dirigenza).png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tablesss.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/mod23.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/mod23.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/send_io.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/send_io.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/style/backtomenu.html" beforeDir="false" afterPath="$PROJECT_DIR$/style/backtomenu.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/style/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/style/header.php" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/httpRequests/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -46,19 +24,83 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api/io_script.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="48">
+              <caret line="3" column="3" lean-forward="true" selection-start-line="3" selection-end-line="3" selection-end-column="41" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api/man_script.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-544">
+              <caret line="2" column="41" selection-start-line="2" selection-start-column="41" selection-end-line="2" selection-end-column="41" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api/dip.php">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cdc/cdc.php">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api/ditta.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-464">
-              <caret line="35" column="10" lean-forward="true" selection-start-line="35" selection-start-column="10" selection-end-line="35" selection-end-column="10" />
+            <state relative-caret-position="192">
+              <caret line="28" column="31" selection-start-line="28" selection-start-column="31" selection-end-line="28" selection-end-column="31" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/api/autenticazione.php">
+        <entry file="file://$PROJECT_DIR$/cdc/manutenzcdc.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="48">
-              <caret line="3" column="19" selection-start-line="3" selection-start-column="19" selection-end-line="3" selection-end-column="19" />
+            <state relative-caret-position="112">
+              <caret line="10" column="46" selection-start-line="10" selection-start-column="46" selection-end-line="10" selection-end-column="46" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cdc/incassiorecdc.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="256">
+              <caret line="16" column="8" lean-forward="true" selection-start-line="16" selection-start-column="4" selection-end-line="17" selection-end-column="43" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/style/backtomenu.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="80">
+              <caret line="5" column="32" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/style/header.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="9" selection-start-column="6" selection-end-column="62" />
             </state>
           </provider>
         </entry>
@@ -117,8 +159,17 @@
         <option value="$PROJECT_DIR$/incassiorecdc.php" />
         <option value="$PROJECT_DIR$/man_script.php" />
         <option value="$PROJECT_DIR$/io_script.php" />
-        <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/api/autenticazione.php" />
+        <option value="$PROJECT_DIR$/cdc/incassiorecdc.php" />
+        <option value="$PROJECT_DIR$/style/header.php" />
+        <option value="$PROJECT_DIR$/js/mod23.js" />
+        <option value="$PROJECT_DIR$/js/send_io.js" />
+        <option value="$PROJECT_DIR$/api/io_script.php" />
+        <option value="$PROJECT_DIR$/api/ditta.php" />
+        <option value="$PROJECT_DIR$/api/man_script.php" />
+        <option value="$PROJECT_DIR$/style/backtomenu.html" />
+        <option value="$PROJECT_DIR$/index.php" />
+        <option value="$PROJECT_DIR$/cdc/manutenzcdc.php" />
       </list>
     </option>
   </component>
@@ -126,7 +177,7 @@
     <servers />
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP" />
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="75" />
     <option name="width" value="1750" />
     <option name="height" value="980" />
@@ -148,7 +199,22 @@
             <path>
               <item name="VISUAL_STORE_MANAGER" type="b2602c69:ProjectViewProjectNode" />
               <item name="VISUAL_STORE_MANAGER" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="VISUAL_STORE_MANAGER" type="b2602c69:ProjectViewProjectNode" />
+              <item name="VISUAL_STORE_MANAGER" type="462c0819:PsiDirectoryNode" />
+              <item name="cdc" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="VISUAL_STORE_MANAGER" type="b2602c69:ProjectViewProjectNode" />
+              <item name="VISUAL_STORE_MANAGER" type="462c0819:PsiDirectoryNode" />
               <item name="external" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="VISUAL_STORE_MANAGER" type="b2602c69:ProjectViewProjectNode" />
+              <item name="VISUAL_STORE_MANAGER" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="VISUAL_STORE_MANAGER" type="b2602c69:ProjectViewProjectNode" />
@@ -164,7 +230,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1561817759776" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1561846885717" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../php/php.exe" />
     <property name="node.js.detected.package.stylelint" value="true" />
     <property name="node.js.path.for.package.stylelint" value="project" />
@@ -268,12 +334,12 @@
       <workItem from="1561299444999" duration="8927000" />
       <workItem from="1561476407235" duration="7004000" />
       <workItem from="1561556578737" duration="14959000" />
-      <workItem from="1561734129063" duration="9291000" />
+      <workItem from="1561734129063" duration="12836000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="301379000" />
+    <option name="totallyTimeSpent" value="304924000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -491,17 +557,86 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-464">
-          <caret line="35" column="10" lean-forward="true" selection-start-line="35" selection-start-column="10" selection-end-line="35" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/api/autenticazione.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="48">
-          <caret line="3" column="19" selection-start-line="3" selection-start-column="19" selection-end-line="3" selection-end-column="19" />
+          <caret line="3" selection-start-line="3" selection-end-line="3" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/mod23.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="7" column="7" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/send_io.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="32">
+          <caret line="8" column="38" lean-forward="true" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/dip.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cdc/cdc.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/ditta.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/io_script.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="3" column="3" lean-forward="true" selection-start-line="3" selection-end-line="3" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/man_script.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-544">
+          <caret line="2" column="41" selection-start-line="2" selection-start-column="41" selection-end-line="2" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/style/header.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="9" selection-start-column="6" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/style/backtomenu.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="5" column="32" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="28" column="31" selection-start-line="28" selection-start-column="31" selection-end-line="28" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cdc/incassiorecdc.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="16" column="8" lean-forward="true" selection-start-line="16" selection-start-column="4" selection-end-line="17" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cdc/manutenzcdc.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="10" column="46" selection-start-line="10" selection-start-column="46" selection-end-line="10" selection-end-column="46" />
         </state>
       </provider>
     </entry>

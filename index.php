@@ -17,7 +17,7 @@ header("Access-Control-Allow-Origin: *");
 <html>
 <head>
 
-        <link href="./style/style.css" type="text/css" rel="stylesheet">
+        <link href="style/style.css" type="text/css" rel="stylesheet">
 
     <title>VISUAL STORE MANAGER</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -26,9 +26,9 @@ header("Access-Control-Allow-Origin: *");
 <body>
 
 <!--<h2 align="center">VISUAL <br> STORE <br> MANAGER</h2>-->
-<div id="logo"><img src="logo.png"></div>
+<div id="logo"><img src="style/logo.png"></div>
 
-<form method="POST" action=".\api\autenticazione.php">
+<form method="POST" action="api/autenticazione.php">
 <div id="container">
     <div id="user">
         <label>USER  </label><br>

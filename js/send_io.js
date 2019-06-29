@@ -1,6 +1,6 @@
 function ajxSend(){
 
-    var tot = $("#tot").val();
+    /*var tot = $("#tot").val();
     var str = $("#xtr").val();
     var id_dip = $("[name='id_dip']").val();
     var pwd_dip = $("[name='pwd_dip']").val();
@@ -16,14 +16,16 @@ function ajxSend(){
     var ent = $("[name='ent']").val();
     var usc = $("[name='usc']").val();
     var inc = $("[name='inc']").val();
-    var resa = $("[name='resa']").val();
+    var resa = $("[name='resa']").val();*/
+
+    var io = $("form").serialize();
 
 
     $.ajax({
         type: "POST",
         crossDomain: true,
-        url: "./io_script.php",
-        data: "tiro="+tiro+"&eff="+eff+"&rid="+rid+"&fe="+fe+"&pr="+pr+"&mal="+mal+"&mat="+mat+"&varie="+varie+"&org="+org+"&ent"+ent+"&usc="+usc+"&inc="+inc+"&resa="+resa+"&tot="+tot+"&str="+str+"&id_dip="+id_dip+"&pwd_dip="+pwd_dip,
+        url: "../api/io_script.php",
+        data: io,
         dataType: "json",
         success: function(data)
         {

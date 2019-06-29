@@ -1,21 +1,21 @@
 <?php
 session_start();
 
-require("user.php");
+require("../classes/user.php");
 header("Access-Control-Allow-Origin: *");
 ?>
 
     <html>
     <head>
 
-        <link href="style.css" type="text/css" rel="stylesheet">
+        <link href="../style/style.css" type="text/css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script type="text/javascript" src="send_io.js"></script>
+        <script type="text/javascript" src="../js/send_io.js"></script>
     </head>
 
     <body>
-    <?php include 'backtomenu.html'; ?>
-    <?php include 'header.php'; ?>
+    <?php include '../style/backtomenu.html'; ?>
+    <?php include '../style/header.php'; ?>
     <div id="modelcontainer">
     <form method="post" id="form">
         <table>

@@ -1,5 +1,5 @@
 <?php
-$rifconn = include_once('connection.php');
+include_once('../config/connection.php');
 header('Content-Type: application/json');
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: X-Requested-With, Content-Type, Accept, Origin, Authorization");
@@ -11,7 +11,7 @@ $cdc=$access->getUsername();*/
 switch($_SERVER['REQUEST_METHOD'])
 {
     case "GET":
-        getDitta($_GET);
+        getDitta($_GET,$conn);
         break;
     case "POST":
         insertDitta($_POST);
@@ -20,16 +20,15 @@ switch($_SERVER['REQUEST_METHOD'])
 }
 
 
-function getDitta($g)
+function getDitta($g,$c)
 {
-    $conn= new mysqli("localhost","root","","vsm_db");
-    //$conn= new mysqli("remotemysql.com:3306","xJdxb0ls5W","02RsSlTvzW","xJdxb0ls5W");
 
-    if ($conn->connect_error) {
-        die("Connessione col db non riuscita: " . $conn->connect_error);
+
+    if ($c->connect_error) {
+        die("Connessione col db non riuscita: " . $c->connect_error);
     }
 
-    $stmt = $conn->prepare("select nome_ditta from ditta_esterna order by nome_ditta;");
+    $stmt = $c->prepare("select nome_ditta from ditta_esterna order by nome_ditta;");
 
     /*parte di codice che si ripete*/
     $stmt->execute();

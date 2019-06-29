@@ -1,7 +1,7 @@
 <?php
 session_start();
-include_once('.\config\connection.php');
-require(".\classes\user.php");
+include_once('../config/connection.php');
+require("../classes/user.php");
 
 $user=$_POST['user'];
 $pwd=md5($_POST['pwd']);
@@ -27,17 +27,17 @@ if(isset($user)&&isset($pwd)&&isset($accesstype))
                 $_SESSION['access']=serialize($us_obj);
                 switch ($_POST['op']) {
                     case 'incassiore':
-                        header('Location: ./cdc/incassiorecdc.php');
+                        header('Location: ../cdc/incassiorecdc.php');
                         break;
                     case 'differenze':
-                        header('Location: ./cdc/diffcdc.php');
+                        header('Location: ../cdc/diffcdc.php');
                         break;
                     case 'manutenzioni':
-                        header('Location: ./cdc/manutenzcdc.php');
+                        header('Location: ../cdc/manutenzcdc.php');
                         break;
                 }//inner switch
             } else {
-                header('Location: index.php?errmsg=error');
+                header('Location: ../index.php?errmsg=error');
             }
             $stmt->close();
             $conn->close();
@@ -54,16 +54,16 @@ if(isset($user)&&isset($pwd)&&isset($accesstype))
 
                 $us_obj = new User ($user,$pwd);
                 $_SESSION['access']=serialize($us_obj);
-                header('Location: ./external/esterno.php');
+                header('Location: ../external/esterno.php');
             } else {
-                header('Location: index.php?errmsg=error');
+                header('Location: ../index.php?errmsg=error');
             }
             break;
     }
 }else
 {
 
-    header('Location: index.php?errmsg=error');
+    header('Location: ../index.php?errmsg=error');
     die();
 
 }
