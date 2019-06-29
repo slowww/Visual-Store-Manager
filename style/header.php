@@ -2,7 +2,7 @@
 
 <?php
 
-require 'connection.php';
+include_once('connection.php');
 
 //RIFARE IN AJAX: richiesta GET a cdc.php con i dati della sessione
 $access=unserialize($_SESSION['access']);

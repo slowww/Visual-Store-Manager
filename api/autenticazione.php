@@ -1,7 +1,7 @@
 <?php
 session_start();
-require 'connection.php';
-require("user.php");
+include_once('.\config\connection.php');
+require(".\classes\user.php");
 
 $user=$_POST['user'];
 $pwd=md5($_POST['pwd']);
@@ -27,13 +27,13 @@ if(isset($user)&&isset($pwd)&&isset($accesstype))
                 $_SESSION['access']=serialize($us_obj);
                 switch ($_POST['op']) {
                     case 'incassiore':
-                        header('Location: incassiorecdc.php');
+                        header('Location: ./cdc/incassiorecdc.php');
                         break;
                     case 'differenze':
-                        header('Location: diffcdc.php');
+                        header('Location: ./cdc/diffcdc.php');
                         break;
                     case 'manutenzioni':
-                        header('Location: manutenzcdc.php');
+                        header('Location: ./cdc/manutenzcdc.php');
                         break;
                 }//inner switch
             } else {
@@ -54,7 +54,7 @@ if(isset($user)&&isset($pwd)&&isset($accesstype))
 
                 $us_obj = new User ($user,$pwd);
                 $_SESSION['access']=serialize($us_obj);
-                header('Location: esterno.php');
+                header('Location: ./external/esterno.php');
             } else {
                 header('Location: index.php?errmsg=error');
             }

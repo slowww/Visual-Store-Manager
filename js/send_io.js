@@ -22,7 +22,7 @@ function ajxSend(){
     $.ajax({
         type: "POST",
         crossDomain: true,
-        url: "http://localhost/visual_store_manager/io_script.php",
+        url: "./io_script.php",
         data: "tiro="+tiro+"&eff="+eff+"&rid="+rid+"&fe="+fe+"&pr="+pr+"&mal="+mal+"&mat="+mat+"&varie="+varie+"&org="+org+"&ent"+ent+"&usc="+usc+"&inc="+inc+"&resa="+resa+"&tot="+tot+"&str="+str+"&id_dip="+id_dip+"&pwd_dip="+pwd_dip,
         dataType: "json",
         success: function(data)
@@ -40,7 +40,7 @@ function ajxSend(){
                     alert("Credenziali inserite errate: utente " + id_dip + " non presente nel database.");
                     break;
                 default:
-                    alert('boooooo');
+                    alert(data.response_code);
                     break;
             }
 

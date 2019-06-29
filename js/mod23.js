@@ -11,7 +11,7 @@ function ajx_man(){
 
     $.ajax({
         type: "POST",
-        url: "http://localhost/visual_store_manager/man_script.php",
+        url: "./man_script.php",
         data: x,
         dataType: "json",
         success: function(data)

@@ -1,6 +1,7 @@
 <?php
 session_start();
-$rifconn = include_once('connection.php');
+
+include_once('connection.php');
 header('Content-Type: application/json');
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: X-Requested-With, Content-Type, Accept, Origin, Authorization");
@@ -12,21 +13,22 @@ $cdc=$access->getUsername();*/
 switch($_SERVER['REQUEST_METHOD'])
 {
     case "GET":
-    getIo($_GET);
+    getIo($_GET,$conn);
     break;
     case "POST":
-    insertIo($_POST);
+    insertIo($_POST,$conn);
     break;
 
 }
 
-function getIo($g)
+function getIo($g,$c)
 {
-    $conn= new mysqli("localhost","root","","vsm_db");
+    //$conn= new mysqli("localhost","root","","vsm_db");
     //$conn= new mysqli("remotemysql.com:3306","xJdxb0ls5W","OSuER1hWdL","xJdxb0ls5W");
 
-    if ($conn->connect_error) {
-        die("Connessione col db non riuscita: " . $conn->connect_error);
+
+    if ($c->connect_error) {
+        die("Connessione col db non riuscita: " . $c->connect_error);
     }
     if (isset($g['cdc']) && isset($g['mese']) && isset($g['anno'])) {
 
@@ -34,13 +36,13 @@ function getIo($g)
         $mese = (int)$g['mese'];
         $anno = (int)$g['anno'];
 
-        $stmt = $conn->prepare("select * from mod_io where cdc_fk like ? and YEAR(DATE(data_io))=? AND MONTH(DATE(data_io)) = ?;");
+        $stmt = $c->prepare("select * from mod_io where cdc_fk like ? and YEAR(DATE(data_io))=? AND MONTH(DATE(data_io)) = ?;");
         $stmt->bind_param("sii", $cdc, $anno, $mese);
 
     } else if(isset($g['id_mod']))
     {
         $id_mod = $g['id_mod'];
-        $stmt = $conn->prepare("select * from mod_io where id_mod_io = ?;");
+        $stmt = $c->prepare("select * from mod_io where id_mod_io = ?;");
         $stmt->bind_param("i",$id_mod);
     }
     else {
@@ -68,6 +70,9 @@ function getIo($g)
     }
     /*fino a qui*/
 
+    $c->close();
+    $stmt->close();
+
 }
 
 
@@ -85,14 +90,17 @@ function getIo($g)
 
 
 
-function insertIo($p)
+function insertIo($p,$c)
 {
-    $conn= new mysqli("localhost","root","","vsm_db");
+    //$conn= new mysqli("localhost","root","","vsm_db");
     //$conn= new mysqli("remotemysql.com:3306","xJdxb0ls5W","OSuER1hWdL","xJdxb0ls5W");
+    //$conn = include_once('connection.php');
 
-    if ($conn->connect_error) {
-        die("Connessione col db non riuscita: " . $conn->connect_error);
-    }
+    /*if ($c->connect_error) {
+        $msg=(object) array("Connessione col db non riuscita: " => $c->connect_error);
+        json_encode($msg);
+    }*/
+
     $nrsett=date('W');
     $tiro=0;
     $eff=0;
@@ -208,12 +216,9 @@ function insertIo($p)
     }
 
 
-
-
-
     $pwd_dip = md5($pwd_dip);
 
-    $stmt = $conn->prepare("SELECT cdc_fk FROM dipendenti WHERE id_dip like ? AND pwd_dip like ?;");
+    $stmt = $c->prepare("SELECT cdc_fk FROM dipendenti WHERE id_dip like ? AND pwd_dip like ?;");
 
     $stmt->bind_param("ss", $id_dip, $pwd_dip);
     $stmt->execute();
@@ -228,7 +233,7 @@ function insertIo($p)
 
         }
         //se autenticazione ok
-        $stmt = $conn->prepare("INSERT INTO `mod_io` (`nr_sett`, `cdc_fk`, `tiro`, `eff`, `rid`, `ferie`, `pr`, `tot`, `mal`, `mat`, `varie`, `org`, `entr`, `usc`, `str`, `incasso`, `resa`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        $stmt = $c->prepare("INSERT INTO `mod_io` (`nr_sett`, `cdc_fk`, `tiro`, `eff`, `rid`, `ferie`, `pr`, `tot`, `mal`, `mat`, `varie`, `org`, `entr`, `usc`, `str`, `incasso`, `resa`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         $stmt->bind_param("isddddddddddddddd",$nrsett,$neg,$tiro,$eff,$rid,$fe,$pr,$tot,$mal,$mat,$varie,$org,$ent,$usc,$str,$inc,$resa);
         $stmt->execute();
 
@@ -253,6 +258,6 @@ function insertIo($p)
     }
 
     $stmt->close();
-    $conn->close();
+    $c->close();
 }
 

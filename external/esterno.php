@@ -201,7 +201,7 @@ https://www.youtube.com/watch?v=5-ptp9tRApM
                 case "io":
                     $.ajax({
                         type: 'GET',
-                        url: 'http://localhost/Visual_store_manager/io_script.php?id_mod=' + id_mod,
+                        url: './io_script.php?id_mod=' + id_mod,
                         dataType: "json",
                         success: function (data) {
 
@@ -255,7 +255,7 @@ https://www.youtube.com/watch?v=5-ptp9tRApM
                 case "man":
                     $.ajax({
                         type: 'GET',
-                        url: 'http://localhost/Visual_store_manager/man_script.php?id_mod=' + id_mod,
+                        url: './man_script.php?id_mod=' + id_mod,
                         dataType: "json",
                         success: function (data) {
 

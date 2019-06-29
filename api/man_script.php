@@ -1,6 +1,6 @@
 <?php
 session_start();
-$rifconn = include_once('connection.php');
+include_once('connection.php');
 header('Content-Type: application/json');
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: X-Requested-With, Content-Type, Accept, Origin, Authorization");
@@ -12,21 +12,20 @@ $cdc=$access->getUsername();*/
 switch($_SERVER['REQUEST_METHOD'])
 {
     case "GET":
-        getMan($_GET);
+        getMan($_GET,$conn);
         break;
     case "POST":
-        insertMan($_POST);
+        insertMan($_POST,$conn);
         break;
 
 }
 
-function getMan($g)
+function getMan($g,$c)
 {
-    $conn= new mysqli("localhost","root","","vsm_db");
-    //$conn= new mysqli("remotemysql.com:3306","xJdxb0ls5W","OSuER1hWdL","xJdxb0ls5W");
 
-    if ($conn->connect_error) {
-        die("Connessione col db non riuscita: " . $conn->connect_error);
+
+    if ($c->connect_error) {
+        die("Connessione col db non riuscita: " . $c->connect_error);
     }
     if (isset($g['cdc']) && isset($g['mese']) && isset($g['anno'])) {
 
@@ -34,13 +33,13 @@ function getMan($g)
         $mese = (int)$g['mese'];
         $anno = (int)$g['anno'];
 
-        $stmt = $conn->prepare("select * from mod_man where cdc_fk like ? and YEAR(DATE(data_man))=? AND MONTH(DATE(data_man)) = ?;");
+        $stmt = $c->prepare("select * from mod_man where cdc_fk like ? and YEAR(DATE(data_man))=? AND MONTH(DATE(data_man)) = ?;");
         $stmt->bind_param("sii", $cdc, $anno, $mese);
 
     } else if(isset($g['id_mod']))//per dettaglio modello
     {
         $id_mod = $g['id_mod'];
-        $stmt = $conn->prepare("select * from dipendenti inner join mod_man on matr = matr_fk inner join ditta_esterna on p_iva_fk = p_iva where id_mod_man = ?");
+        $stmt = $c->prepare("select * from dipendenti inner join mod_man on matr = matr_fk inner join ditta_esterna on p_iva_fk = p_iva where id_mod_man = ?");
         $stmt->bind_param("i",$id_mod);
     }
     else {
@@ -85,13 +84,12 @@ function getMan($g)
 
 
 
-function insertMan($p)
+function insertMan($p,$c)
 {
-    $conn= new mysqli("localhost","root","","vsm_db");
-    //$conn= new mysqli("remotemysql.com:3306","xJdxb0ls5W","OSuER1hWdL","xJdxb0ls5W");
 
-    if ($conn->connect_error) {
-        die("Connessione col db non riuscita: " . $conn->connect_error);
+
+    if ($c->connect_error) {
+        die("Connessione col db non riuscita: " . $c->connect_error);
     }
 
 
@@ -119,6 +117,7 @@ function insertMan($p)
                 break;
             case "noperai":
                 $nop = $v;
+                break;
             case "mat":
                 $mat = $v;
                 break;
@@ -150,7 +149,7 @@ function insertMan($p)
 
     //$pwd_dip = md5($pwd_dip);
 
-    $stmt = $conn->prepare("SELECT cdc_fk FROM dipendenti WHERE id_dip like ? AND pwd_dip like ?;");
+    $stmt = $c->prepare("SELECT cdc_fk FROM dipendenti WHERE id_dip like ? AND pwd_dip like ?;");
     $stmt->bind_param("ss", $id_dip, $pwd_dip);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -163,7 +162,7 @@ function insertMan($p)
 
 
         //p_iva
-        $stmt = $conn->prepare("SELECT p_iva FROM ditta_esterna WHERE nome_ditta LIKE ?;");
+        $stmt = $c->prepare("SELECT p_iva FROM ditta_esterna WHERE nome_ditta LIKE ?;");
         $stmt->bind_param("s", $nome_ditta);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -173,7 +172,7 @@ function insertMan($p)
             }
         }
         //matr
-        $stmt = $conn->prepare("SELECT matr FROM dipendenti WHERE cogn_dip LIKE ?;");
+        $stmt = $c->prepare("SELECT matr FROM dipendenti WHERE cogn_dip LIKE ?;");
         $stmt->bind_param("s", $cogn_dip);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -183,7 +182,7 @@ function insertMan($p)
             }
         }
 
-            $stmt = $conn->prepare("INSERT INTO `mod_man`(`cdc_fk`, `p_iva_fk`, `matr_fk`, `tipoman`, `operazioni`, `attrezz`, `durata`, `noper`, `mat`, `oss`, `comment`) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+            $stmt = $c->prepare("INSERT INTO `mod_man`(`cdc_fk`, `p_iva_fk`, `matr_fk`, `tipoman`, `operazioni`, `attrezz`, `durata`, `noper`, `mat`, `oss`, `comment`) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
             $stmt->bind_param("ssisssiisss", $cdc_fk, $p_iva_fk, $matr_fk, $tipoman, $op, $attrezz, $durata, $nop, $mat, $oss, $comment);
             $stmt->execute();
 
@@ -195,7 +194,7 @@ function insertMan($p)
                 echo json_encode($msg);
             } else {
                 //var_dump($stmt->affected_rows);
-                $msg = (object)array('response_code' => $conn->error . " " . $p_iva_fk);//inserimento no
+                $msg = (object)array('response_code' => $c->error . " " . $p_iva_fk);//inserimento no
                 echo json_encode($msg);
             }
         }
@@ -205,7 +204,7 @@ function insertMan($p)
             }
 
             $stmt->close();
-            $conn->close();
+            $c->close();
 
 
     }

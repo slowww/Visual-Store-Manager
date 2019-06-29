@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'connection.php';
+
 require("user.php");
 header("Access-Control-Allow-Origin: *");
 ?>
