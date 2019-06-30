@@ -6,8 +6,7 @@ function ajx_man(){
 
 
     var man = $("form").serialize();
-    console.log(x);
-
+    
 
     $.ajax({
         type: "POST",
