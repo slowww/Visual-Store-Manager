@@ -39,7 +39,7 @@ function ajxSend(){
                     alert("Errore nell'inserimento del modello!");
                     break;
                 case '400':
-                    alert("Credenziali inserite errate: utente " + id_dip + " non presente nel database.");
+                    alert("Credenziali inserite errate: utente non presente nel database.");
                     break;
                 default:
                     alert(data.response_code);
