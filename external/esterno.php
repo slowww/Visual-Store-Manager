@@ -1,22 +1,22 @@
 <?php
 session_start();
-require 'connection.php';
-require("user.php");
+include_once('../config/connection.php');
+require("../classes/user.php");
 header("Access-Control-Allow-Origin: *");
 ?>
 
 <html>
 
 <head>
-    <link href="style.css" rel="stylesheet" type="text/css">
+    <link href="../style/style.css" rel="stylesheet" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-    <script type="text/javascript" src="createGraph.js"></script>
-    <script type="text/javascript" src="research.js"></script>
+    <script type="text/javascript" src="../js/createGraph.js"></script>
+    <script type="text/javascript" src="../js/research.js"></script>
 </head>
 <body>
-<?php include 'backtomenu.html'; ?>
+<?php include '../style/backtomenu.html'; ?>
 
 <h2>BENVENUTO,
 
@@ -201,7 +201,7 @@ https://www.youtube.com/watch?v=5-ptp9tRApM
                 case "io":
                     $.ajax({
                         type: 'GET',
-                        url: './io_script.php?id_mod=' + id_mod,
+                        url: '../api/io_script.php?id_mod=' + id_mod,
                         dataType: "json",
                         success: function (data) {
 
@@ -255,7 +255,7 @@ https://www.youtube.com/watch?v=5-ptp9tRApM
                 case "man":
                     $.ajax({
                         type: 'GET',
-                        url: './man_script.php?id_mod=' + id_mod,
+                        url: '../api/man_script.php?id_mod=' + id_mod,
                         dataType: "json",
                         success: function (data) {
 

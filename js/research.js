@@ -15,7 +15,7 @@ function ricercamod()
             $.ajax({
                 type: 'GET',
                 crossDomain: true,
-                url: './io_script.php?cdc='+cdc+'&mese='+mese+'&anno='+anno,
+                url: '../api/io_script.php?cdc='+cdc+'&mese='+mese+'&anno='+anno,
 
                 success: function (data) {
                     if(data.msg)
@@ -46,7 +46,7 @@ function ricercamod()
             $.ajax({
                 type: 'GET',
                 crossDomain: true,
-                url: './man_script.php?cdc='+cdc+'&mese='+mese+'&anno='+anno,
+                url: '../api/man_script.php?cdc='+cdc+'&mese='+mese+'&anno='+anno,
 
                 success: function (data) {
                     if(data.msg)

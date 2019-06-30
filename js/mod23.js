@@ -11,7 +11,7 @@ function ajx_man(){
 
     $.ajax({
         type: "POST",
-        url: "./man_script.php",
+        url: "../api/man_script.php",
         data: man,
         dataType: "json",
         success: function(data)
