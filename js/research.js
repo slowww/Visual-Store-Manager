@@ -42,7 +42,7 @@ function ricercamod()
             break;
 
         case "man":
-            $("#chartcontainer").empty();
+            $("#myChart").empty();
             $.ajax({
                 type: 'GET',
                 crossDomain: true,
@@ -63,7 +63,7 @@ function ricercamod()
                         });
                         $("#result").append('</table>');
 
-                        //$("#chartcheckbox").css('visibility','visible');
+
                     }
 
 
